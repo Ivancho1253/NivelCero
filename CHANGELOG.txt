@@ -1,0 +1,22 @@
+ZERO PROTOCOL - v0.5.0
+
+NOVEDADES
+- Vista en primera persona (FPS) y tercera persona (TPS), tecla V/C.
+- Movimiento WASD intuitivo y relativo al ángulo de cámara.
+- Inversión lateral corregida para el sistema de coordenadas del mundo.
+- Control directo de cámara con el mouse (Pointer Lock).
+- Giro libre de 360° + control vertical de mirada.
+- Orientación del personaje en tercera persona y ocultación del modelo en FPS.
+- Dash coherente con la dirección del jugador o mirada.
+- Zoom en tercera persona con rueda del mouse.
+- Interfaz, ayuda, pausa y captura de cursor actualizadas.
+
+HEREDADO DE v0.4.2
+- Mundo cyberpunk 3D, recolección de fragmentos, checkpoints, drones y boss.
+- Hack de nodos, proyectiles, efectos y sonido original.
+- Un nivel continuo completo con pantalla final.
+
+VALIDACIÓN
+- Sintaxis JS: OK.
+- Pruebas lógicas de entradas WASD, orientación 90°, mouse y cambio de cámara: OK.
+- Prueba de ejecución gráfica real en navegador: pendiente de validación en PC.

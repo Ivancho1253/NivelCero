@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<meta name="theme-color" content="#040b15"/>
+<title>NIVEL CERO // ZERO PROTOCOL — Alpha 3D · FPS / TPS</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml"/><link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+<canvas id="world" aria-label="Videojuego 3D"></canvas>
+<div id="grain"></div><div id="vignette"></div>
+<div class="top-logo"><span class="logo-glyph">N//0</span><span class="logo-name">NIVEL <strong>CERO</strong><small>ZERO PROTOCOL / ALFA 0.5</small></span></div>
+<div id="hud" class="hidden">
+  <div class="hud-top-left">
+    <div class="tag">INTEGRIDAD DE ZERO <span id="heartText">3 / 3</span></div>
+    <div class="health-track"><div id="healthFill"></div></div>
+    <div class="hud-stats"><span>FRAGMENTOS <strong id="fragmentsLabel">0 / 3</strong></span><span>NODO <strong id="chapterLabel">01</strong></span></div>
+  </div>
+  <div class="hud-top-right"><span class="status-pip"></span><span id="zoneName">SECTOR DE ARRANQUE</span><span class="top-right-sub">SIMULACIÓN / CAPA 01</span><span class="nav-hint" id="navHint">◈ OBJETIVO ADELANTE</span></div>
+  <div class="objective-panel"><small>OBJETIVO ACTUAL</small><div id="objective">Recupera los fragmentos de código</div><div class="obj-underline"></div></div>
+  <div id="subtitles" aria-live="polite"></div>
+  <div class="hud-bottom-left"><span class="control-icon">W A S D</span> MOVER <span class="control-icon">ESPACIO</span> SALTAR <span class="control-icon">SHIFT</span> DASH <span class="control-icon">E</span> HACKEAR <span class="control-icon">V</span> CÁMARA <span class="control-icon">MOUSE</span> MIRAR <span class="control-icon">M</span> AUDIO</div>
+  <div class="ability"><div class="ability-title">PROTOCOLO DASH</div><div class="dash-meter"><div id="dashFill"></div></div><span id="dashText">LISTO</span></div>
+  <div id="bossHud" class="hidden"><div class="boss-hdr">GUARDIAN // PROTOCOLO DE DEFENSA</div><div class="boss-track"><div id="bossFill"></div></div><div id="bossStatus">ESCUDO EN LÍNEA · HACK 0/2 TERMINALES</div></div>
+  <div id="interact" class="hidden"><kbd>E</kbd><span id="interactText">INTERACTUAR</span></div>
+  <div id="crosshair"></div>
+  <div class="camera-panel"><div id="cameraModeLabel">3ª PERSONA</div><button id="cameraToggle" type="button">CAMBIAR A 1ª PERSONA [V]</button><div id="mouseStatus">CLICK EN EL JUEGO PARA MIRAR</div></div>
+  <div class="hud-bottom-right">FPS <span id="fpsLabel">60</span> <span class="sep">/</span> NIVEL 01 <span class="sep">/</span> v0.5</div>
+</div>
+<div id="toast" class="hidden"></div>
+<div id="screenFlash"></div>
+<div id="menu" class="overlay">
+  <div class="menu-bg-grid"></div>
+  <div class="menu-card">
+    <div class="eyebrow"><span class="dot"></span> SISTEMA DE PRUEBAS · BUILD 0.5.0</div>
+    <div class="menu-title">NIVEL<br><span>CERO</span><span class="title-light">_</span></div>
+    <p class="menu-subtitle">ZERO PROTOCOL</p>
+    <p class="menu-copy">Un sistema colapsado. Un avatar fuera de control.<br>Recuperá el código. Desactivá al Guardián. Escapá del Núcleo.</p>
+    <button class="primary" id="startButton">INICIAR PROTOCOLO <span>↗</span></button>
+    <div class="menu-controls">WASD <b>MOVER</b>　 MOUSE <b>MIRAR</b>　 V <b>1ª / 3ª PERSONA</b><br>SPACE <b>SALTAR</b>　 SHIFT <b>DASH</b>　 E <b>HACK</b></div>
+    <div class="menu-footer"><span>UN JUEGO DE NIVEL CERO</span><span>BUILD JUGABLE • PC / NAVEGADOR</span></div>
+  </div>
+  <div class="menu-side-text">EL SISTEMA RECUERDA TODO <span> // </span> EXCEPTO A VOS</div>
+</div>
+<div id="pause" class="overlay hidden">
+  <div class="simple-card"><div class="eyebrow">SISTEMA PAUSADO</div><h2>EN ESPERA<span>_</span></h2><p>El protocolo está suspendido. Al continuar se activa el mouse para mirar. Usá V para cambiar entre primera y tercera persona.</p><button class="primary" id="resumeButton">CONTINUAR</button><button class="secondary" id="restartFromPause">REINICIAR NIVEL</button></div>
+</div>
+<div id="end" class="overlay hidden">
+  <div class="simple-card end-card"><div class="eyebrow" id="endEyebrow">PROTOCOLO COMPLETADO</div><h2 id="endTitle">SISTEMA RESTAURADO<span>_</span></h2><p id="endBody">Zero ha alcanzado el portal.</p><div id="endStats"></div><button class="primary" id="replayButton">JUGAR DE NUEVO ↗</button></div>
+</div>
+<div class="bottom-brand">NIVEL CERO / ESCAPE DEL GLITCH</div>
+<script src="game.js"></script>
+</body></html>

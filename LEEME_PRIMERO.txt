@@ -1,0 +1,59 @@
+NIVEL CERO: ESCAPE DEL GLITCH
+ZERO PROTOCOL - Versión 3D 0.5.0 (cámara libre)
+
+CÓMO INICIAR (Windows)
+1. Extraé el ZIP completo, no ejecutes el juego dentro del ZIP.
+2. Abrí JUGAR_NIVEL_CERO.bat, o hacé doble clic en index.html.
+3. Elegí Chrome o Edge actualizado, con aceleración gráfica activada.
+4. Presioná INICIAR PROTOCOLO. La cámara intentará capturar el mouse.
+5. Si el mouse no controla la cámara, hacé clic dentro del juego.
+
+CONTROLES (PRIMERA Y TERCERA PERSONA)
+W      Avanzar hacia donde mira la cámara.
+S      Retroceder.
+A      Moverse hacia la izquierda de la cámara.
+D      Moverse hacia la derecha de la cámara.
+MOUSE  Mirar arriba, abajo y girar 360 grados (sin arrastrar cuando está capturado).
+V      Cambiar instantáneamente entre 1ª y 3ª persona. También funciona C.
+ESPACIO Saltar.
+SHIFT   Dash en la dirección de WASD o de la cámara si no estás moviéndote.
+E       Hablar con Bit / hackear terminal cercano.
+RUEDA   Acercar o alejar cámara (solo tercera persona).
+ESC     Pausar y liberar mouse. Usá CONTINUAR para retomar.
+M       Activar/silenciar sonido.
+
+El mouse se captura mediante Pointer Lock, como en los juegos de PC.
+Esto permite rotar sin límites y mantiene el cursor fuera de la pantalla.
+Si no se permite la captura, podés mantener clic y arrastrar para mirar.
+
+OBJETIVO DEL NIVEL
+1. Recuperá los 3 Fragmentos de Código (amarillos), incluido uno opcional lateral.
+2. Activá los checkpoints verdes.
+3. En la arena del Guardián, hackeá los terminales ALFA y BETA con E.
+4. Con el escudo desactivado, hacé DASH contra el núcleo del Guardián.
+5. Repetí la secuencia hasta quitarle sus 3 puntos de vida.
+6. Entrá al portal de salida para completar el nivel.
+
+CAMBIOS DE v0.5.0
+- Cámara real en primera persona: mirada desde la altura de Zero.
+- Cámara libre en tercera persona: podés girar 360° y ajustar distancia con la rueda.
+- Intercambio inmediato entre perspectivas con V (o C).
+- WASD corregido: ambas perspectivas usan movimiento relativo a la dirección de vista.
+- Mouse-look directo con captura del cursor; ya no hace falta arrastrar.
+- Dash ahora respeta la dirección relativa a la cámara.
+- El personaje rota con la cámara en tercera persona y se oculta en primera persona.
+- HUD y ayuda actualizados; ESC pausa y libera el cursor.
+
+REQUISITOS / LIMITACIONES
+- Compatible con navegadores con WebGL2 y teclado + mouse.
+- Sin dependencias externas, sin instalar software y sin conexión a internet.
+- Prototipo web 3D; NO se compiló en Unity ni se convirtió en .exe nativo.
+- Para la AE4 oficial, la consigna exige un ejecutable Unity 2D. Confirmá con
+  la cátedra antes de reemplazarlo por esta alternativa 3D.
+
+TESTEO
+Se comprobó de forma automatizada con un simulador de entradas JavaScript:
+W avanza; S retrocede; A y D se desplazan hacia su lado visual correcto;
+W rota junto con la orientación de la cámara, V alterna perspectivas;
+el movimiento del mouse modifica yaw y pitch; dash sigue WASD.
+El render 3D y Pointer Lock necesitan verificación en Chrome o Edge de tu PC.
