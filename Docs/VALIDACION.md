@@ -55,8 +55,8 @@ Verificación real mediante FFprobe:
 
 | Archivo en Entrega/04_Gameplay/ | Video | Audio | Duración y tamaño |
 |---|---|---|---|
-| Nivel_Cero_Gameplay_3D.mp4 | H.264, 1920×1080, 30 fps codificados | AAC, 48 kHz, estéreo | 111,502417 s; 39.516.980 bytes. |
-| Nivel_Cero_Gameplay_2D.mp4 | H.264, 1078×904, 30 fps codificados | AAC, 48 kHz, estéreo | 30,887583 s; 2.252.736 bytes. |
+| Nivel_Cero_Gameplay_3D.mp4 (0.7) | H.264, 1920×1080, 30 fps | AAC, 48 kHz, estéreo | 63,672 s; 33.149.135 bytes; tiempo real. |
+| Nivel_Cero_Gameplay_2D.mp4 (0.7) | H.264, 1920×1080, 30 fps | AAC, 48 kHz, estéreo | 74,7 s; 11.354.494 bytes; tiempo real; pico de audio −1,6 dBFS. |
 
 Son capturas de gameplay automatizado real desde el framebuffer Unity, no cinemáticas que simulen un recorrido. Los 30 fps describen el archivo codificado; no son profiling del juego.
 

@@ -20,7 +20,9 @@ namespace NivelCero.Editor
             var session = new GameObject("Nivel Cero · sesión").AddComponent<Session>();
             new SectorBuilder().Build(session);
             var renderers = Object.FindObjectsByType<Renderer>(FindObjectsSortMode.None);
-            var materials = renderers.SelectMany(r => r.sharedMaterials).Where(m => m != null && !AssetDatabase.Contains(m)).Distinct().ToArray();
+            var materials = renderers.SelectMany(r => r.sharedMaterials)
+                .Concat(new[] { session.CyanMaterial, session.RedMaterial, session.ExposedMaterial })
+                .Where(m => m != null && !AssetDatabase.Contains(m)).Distinct().ToArray();
             int index = 0;
             foreach (var material in materials)
             {

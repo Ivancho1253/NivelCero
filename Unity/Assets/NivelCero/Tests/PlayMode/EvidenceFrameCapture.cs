@@ -81,9 +81,19 @@ namespace NivelCero.Tests
                     if (texture.width != manifest.width || texture.height != manifest.height)
                         throw new IOException("The game framebuffer changed resolution during recording.");
                     string name = "frame-" + manifest.frameCount.ToString("D6") + ".png";
-                    byte[] png = ImageConversion.EncodeToPNG(texture);
-                    if (png == null || png.Length < 8) throw new IOException("Unity PNG encoding failed.");
-                    File.WriteAllBytes(Path.Combine(framesDirectory, name), png);
+                    // PNG encoding runs on worker threads so the main thread (and the game clock)
+                    // is not stalled; the raw Unity framebuffer bytes are copied first.
+                    byte[] raw = texture.GetRawTextureData<byte>().ToArray();
+                    var format = texture.graphicsFormat; uint w = (uint)texture.width, h = (uint)texture.height;
+                    string target = Path.Combine(framesDirectory, name);
+                    while (pending.Count > 48) { pending[0].Wait(); pending.RemoveAt(0); }
+                    pending.Add(System.Threading.Tasks.Task.Run(() =>
+                    {
+                        byte[] png = ImageConversion.EncodeArrayToPNG(raw, format, w, h);
+                        if (png == null || png.Length < 8) throw new IOException("Unity PNG encoding failed.");
+                        File.WriteAllBytes(target, png);
+                    }));
+                    pending.RemoveAll(t => t.IsCompleted && !t.IsFaulted);
                     manifest.frames.Add(new Frame { file = name, unityFrame = Time.frameCount,
                         simulationSeconds = Time.unscaledTimeAsDouble - startedSimulation,
                         wallSeconds = capturedWall });
@@ -107,11 +117,16 @@ namespace NivelCero.Tests
             WriteManifest();
         }
 
+        private readonly List<System.Threading.Tasks.Task> pending = new List<System.Threading.Tasks.Task>();
+
         private void WriteManifest()
         {
             if (manifest == null || finalized) return;
             manifest.wallDurationSeconds = Time.realtimeSinceStartupAsDouble - startedWall;
             manifest.simulationDurationSeconds = Time.unscaledTimeAsDouble - startedSimulation;
+            try { System.Threading.Tasks.Task.WaitAll(pending.ToArray()); }
+            catch (Exception exception) { manifest.error = exception.ToString(); }
+            pending.Clear();
             manifest.complete = String.IsNullOrEmpty(manifest.error) && manifest.frameCount > 0;
             File.WriteAllText(Path.Combine(directory, "frame-manifest.json"), JsonUtility.ToJson(manifest, true));
             finalized = true;

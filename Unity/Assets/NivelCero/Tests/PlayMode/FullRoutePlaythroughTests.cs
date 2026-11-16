@@ -19,6 +19,7 @@ namespace NivelCero.Tests
     /// </summary>
     public sealed class FullRoutePlaythroughTests
     {
+        readonly System.Collections.Generic.List<InputDevice> physicalDevices = new System.Collections.Generic.List<InputDevice>();
         Keyboard keyboard;
         Mouse mouse;
         Session session;
@@ -78,12 +79,16 @@ namespace NivelCero.Tests
             InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
 #endif
             InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+            // Physical devices are ignored so typing in other windows cannot steer the bot.
+            foreach (var device in InputSystem.devices)
+                if ((device is Keyboard || device is Mouse || device is Gamepad) && device.enabled) { InputSystem.DisableDevice(device); physicalDevices.Add(device); }
             keyboard = InputSystem.AddDevice<Keyboard>(); mouse = InputSystem.AddDevice<Mouse>();
             InputSystem.EnableDevice(keyboard); InputSystem.EnableDevice(mouse);
             keyboard.MakeCurrent(); mouse.MakeCurrent();
             yield return SceneManager.LoadSceneAsync("SectorDeArranque3D", LoadSceneMode.Single);
             yield return null;
             session = Session.I;
+            if (session != null) session.PauseWhenUnfocused = false; // OS focus changes must not pause the recorded route
             Assert.That(session, Is.Not.Null);
             Assert.That(session.Player, Is.Not.Null);
             savePath = Path.Combine(Path.GetTempPath(), "nivel-cero-route-" + Guid.NewGuid().ToString("N") + ".json");
@@ -116,6 +121,8 @@ namespace NivelCero.Tests
             if (audioCapture != null) audioCapture.StopCapture();
             if (keyboard != null && keyboard.added) InputSystem.RemoveDevice(keyboard);
             if (mouse != null && mouse.added) InputSystem.RemoveDevice(mouse);
+            foreach (var device in physicalDevices) if (device.added) InputSystem.EnableDevice(device);
+            physicalDevices.Clear();
             var empty = SceneManager.CreateScene("Route test cleanup");
             SceneManager.SetActiveScene(empty);
             var world = SceneManager.GetSceneByName("SectorDeArranque3D");

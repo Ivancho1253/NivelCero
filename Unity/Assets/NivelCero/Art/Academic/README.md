@@ -1,17 +1,37 @@
-# Atlas académico original
+# Arte 2D de la escena académica (0.7)
 
-`tiles.png` es un atlas de 256 × 32 píxeles, dividido en ocho celdas de 32 × 32. Se genera mediante `Tools/GenerateTiles.ps1`, usando System.Drawing. No contiene recursos descargados ni licencias de terceros para registrar. Es arte provisional original, no el acabado visual de la experiencia 3D.
+## Origen y licencia
 
-Orden de las celdas: suelo metálico, peligro, Zero, Bit, Fragmento de Código, Guardián, portal, servidor de fondo.
+Todo el pixel art es original y se genera por código con `Tools/Art/generate_2d_art.py` (Python + Pillow, semillas fijas). No contiene recursos descargados ni licencias de terceros. Sigue la guía `Docs/Arte/DIRECCION_ARTISTICA.md`.
 
-Importar como Sprite, textura legible y filtro Point. `Academic2D` recorta ocho sprites desde la textura en ejecución, usa el suelo en un `Tilemap` con `TilemapCollider2D` y conserva los otros sprites como entidades de la escena.
+Las hojas están en `Assets/NivelCero/Resources/Academic2D/` y se importan automáticamente con filtro Point, sin mipmaps ni compresión y sin reescalado a potencia de dos (`Editor/AssetImportRules.cs`). Escala: **32 píxeles = 1 unidad = 1 tile**.
 
-Se ejecutó el generador y se inspeccionó visualmente el PNG. Las ocho celdas contienen píxeles visibles. El audio de esta escena también es original, generado en C# como pulsos sinusoidales; no se incorporaron recursos externos.
+| Hoja | Celda | Contenido |
+|---|---|---|
+| `tileset.png` | 32×32 | 32 tiles: suelo con bordes izquierdo/derecho y variantes, relleno, bordes de foso, pasarela (izq./centro/der.), muro y remate, purga de foso (2 cuadros), paneles de fondo, viga, pilar, caños, cables, consola, rack, señal de ruta, señal de peligro, corrupción (2), suelo y relleno de arena. |
+| `zero.png` | 48×56 | Zero: reposo 4, carrera 8, salto 2, caída 2, aterrizaje 1, dash 2, daño 2, muerte 6. Pies en la fila 51 para coincidir con la cápsula. |
+| `zero_arm.png` | 48×48 | Brazo y arma apuntados en 9 ángulos (−90° a 90°), Pulse Blaster y Energy Blade. Se espeja, no se rota. |
+| `zero_shoulders.txt` | — | Hombro por cuadro, para fijar el brazo al cuerpo en cada pose. |
+| `bit.png` | 24×24 | Bit: reposo 4, parpadeo 2, hablar 4, alerta 2, preocupado 2, mirar 4. |
+| `guardian.png` | 128×128 | Guardián en 3 variantes de blindaje (una por fase): reposo 4, carga 3, disparo 2, núcleo expuesto 2, brazos arriba 2, golpe 2, destello 1, glitch 2; muerte 8; latente 1. |
+| `fx.png` | 48×48 | Descarga hostil, pulso de Zero, impactos cian/blanco/rojo, onda de choque, bloque corrupto, retícula, columna marcada, corte de hoja, polvo, fragmento (8), checkpoint (4), terminal (4), tecla E, triángulo de peligro. |
+| `portal.png` | 64×128 | Portal cerrado y abierto (4). |
+| `barrier.png` | 32×32 | Láser del firewall (2), placa de la compuerta, emisor. |
+| `parallax_far/mid/near.png` | 640×480 | Torres de servidores, torres de refrigeración y pasarela, conductos cercanos (repetibles en horizontal). |
+| `portraits.png` | 48×48 | Retratos de diálogo: Bit (4 expresiones), GL1TCH, Guardián. Se usan también en el HUD 3D. |
 
-`Academic2D` contiene un recorrido con dos saltos sobre huecos, una ruta elevada opcional, dos fragmentos obligatorios, checkpoints, Bit como NPC autónomo, un circuito rotatorio de 3 × 3 que controla un firewall físico, un Guardián con tres fases y portal de salida. El fallo del hack tiene penalización y cooldown; el guardado de esta escena es durante la partida, no persistente entre ejecuciones.
+`tiles.png` (atlas 256×32 de la versión 0.6) se conserva como referencia histórica; ya no se dibuja.
 
-La ruta opcional no debe bloquear el corredor principal. Se retiraron dos escalones que atravesaban todo el camino y se ajustó el impulso del salto a 14 unidades/s para que la plataforma elevada se pueda alcanzar voluntariamente desde un lateral. El paso a nivel del suelo queda abierto y permite completar el nivel sin el tercer fragmento.
+## Tilemap editable
 
-`Tests/PlayMode/AcademicFullRouteTests.cs` recorre la escena real con teclado y mouse sintéticos: inicia mediante el mismo comando del menú, salta ambos huecos, recupera los dos fragmentos principales, abre el circuito con E, gira sus módulos, valida la conexión, atraviesa el firewall, activa el checkpoint, dispara contra el Guardián y entra al portal. No escribe posición, salud ni progreso. Su existencia no acredita un recorrido aprobado hasta que Unity lo ejecute y genere resultados.
+`Nivel Cero > Construir escena 2D editable` crea `Art/Academic/Tiles/*.asset` (un Tile por pieza; suelo, pasarela y muros con colisión Grid) y hornea seis Tilemaps en la escena: suelo con `TilemapCollider2D`, pasarela opcional de un sentido (`PlatformEffector2D`), purga de fosos, pared de fondo, decoración y corrupción. Con la escena horneada, `Academic2D` usa esos Tilemaps; si se vacían, vuelve a generarlos desde `Academic2DLevel` al ejecutar.
 
-Hay pruebas de integración en `Tests/Editor/AcademicPlayModeTests.cs`: entran en Play Mode y verifican Tilemap/física, bloqueo del firewall, éxito real del circuito y consecuencias del fallo. La mera presencia de las pruebas no acredita su aprobación. El recorrido manual de principio a fin y la revisión del build deben registrarse después de ejecutarse realmente.
+## Regenerar
+
+```
+python -I Tools/Art/generate_2d_art.py
+```
+
+Luego, en Unity, reimportar y volver a hornear la escena 2D. Los tamaños de celda y el orden de filas están replicados en `Scripts/Academic/Academic2DArt.cs`: cambiar ambos a la vez.
+
+`Docs/Arte/hoja_sprites_2d.png` y `Docs/Arte/hoja_guardian_2d.png` son láminas de revisión ampliadas.

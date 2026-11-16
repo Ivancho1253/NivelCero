@@ -18,6 +18,7 @@ namespace NivelCero.Tests
     /// </summary>
     public sealed class AcademicFullRouteTests
     {
+        readonly System.Collections.Generic.List<InputDevice> physicalDevices = new System.Collections.Generic.List<InputDevice>();
         Academic2D world;
         Keyboard keyboard;
         Mouse mouse;
@@ -57,6 +58,9 @@ namespace NivelCero.Tests
             InputSystem.settings.backgroundBehavior = InputSettings.BackgroundBehavior.IgnoreFocus;
             InputSystem.settings.editorInputBehaviorInPlayMode = InputSettings.EditorInputBehaviorInPlayMode.AllDeviceInputAlwaysGoesToGameView;
             InputSystem.settings.updateMode = InputSettings.UpdateMode.ProcessEventsInDynamicUpdate;
+            // Physical devices are ignored so typing in other windows cannot steer the bot.
+            foreach (var device in InputSystem.devices)
+                if ((device is Keyboard || device is Mouse || device is Gamepad) && device.enabled) { InputSystem.DisableDevice(device); physicalDevices.Add(device); }
             keyboard = InputSystem.AddDevice<Keyboard>(); mouse = InputSystem.AddDevice<Mouse>();
             InputSystem.EnableDevice(keyboard); InputSystem.EnableDevice(mouse);
             keyboard.MakeCurrent(); mouse.MakeCurrent();
@@ -86,6 +90,8 @@ namespace NivelCero.Tests
             if (audioCapture != null) audioCapture.StopCapture();
             if (keyboard != null && keyboard.added) InputSystem.RemoveDevice(keyboard);
             if (mouse != null && mouse.added) InputSystem.RemoveDevice(mouse);
+            foreach (var device in physicalDevices) if (device.added) InputSystem.EnableDevice(device);
+            physicalDevices.Clear();
             var empty = SceneManager.CreateScene("Academic route cleanup");
             SceneManager.SetActiveScene(empty);
             var scene = SceneManager.GetSceneByName("AE4_2D_SectorDeArranque");
@@ -143,17 +149,32 @@ namespace NivelCero.Tests
             Assert.That(world.ActiveCircuit, Is.Null);
             yield return MoveTo(73, "Checkpoint anterior al Guardián");
             Assert.That(world.ActiveCheckpoint.x, Is.EqualTo(73).Within(.01f), State());
-            yield return MoveTo(84, "Entrada al Núcleo de Seguridad");
+            yield return MoveTo(84, "Entrada al Núcleo de Seguridad (presentación del Guardián)");
+            Assert.That(world.Boss, Is.Not.EqualTo(Academic2D.BossState.Dormant), "Crossing the arena threshold must wake the Guardian. " + State());
             yield return Press(Key.Digit1);
-            stage = "Combatir al Guardián con disparos reales de Pulse Blaster"; Log();
-            for (int f = 0; f < 900 && world.BossHealth > 0; f++)
+            stage = "Combatir al Guardián: esquivar marcas, saltar ondas y disparar en las aperturas"; Log();
+            int jumpHold = 0, exposedFrames = 0;
+            float home = 83;
+            for (int f = 0; f < 4200 && world.BossHealth > 0; f++)
             {
                 EnsureAlive();
-                Input(0, Key.None, true);
+                float x = world.PlayerPosition.x;
+                float? goal = null;
+                // Only public, player-visible information: red markers and the travelling wave.
+                if (!world.IsPositionSafe(x)) goal = NearestSafe(x);
+                else if (Mathf.Abs(x - home) > 2.5f && world.IsPositionSafe(home)) goal = home;
+                float axis = goal.HasValue && Mathf.Abs(goal.Value - x) > .15f ? Mathf.Sign(goal.Value - x) : 0;
+                float wave = world.ShockwaveDistance;
+                if (jumpHold <= 0 && world.IsGrounded && wave > .3f && wave < 2.2f) jumpHold = 18;
+                Key action = jumpHold > 0 ? Key.Space : Key.None;
+                if (jumpHold > 0) jumpHold--;
+                if (world.BossVulnerable) exposedFrames++;
+                Input(axis, action, true);
                 yield return null;
             }
             Input(0);
             Assert.That(world.BossHealth, Is.EqualTo(0), State());
+            Assert.That(exposedFrames, Is.GreaterThan(0), "The Guardian must open its core between attacks.");
             yield return MoveTo(102, "Atravesar el portal de salida");
             Assert.That(world.LevelCompleted, Is.True, State());
             Assert.That(world.DeathCount, Is.Zero, "A successful route must never invoke respawn.");
@@ -190,8 +211,9 @@ namespace NivelCero.Tests
             {
                 EnsureAlive();
                 float difference = destination - world.PlayerPosition.x;
-                Key action = f < 3 ? Key.Space : f == 14 ? Key.LeftShift : Key.None;
-                Input(Mathf.Abs(difference) < .25f ? 0 : Mathf.Sign(difference), action);
+                // Hold jump like a player does (variable jump height), dash mid-air.
+                Key action = f < 20 ? Key.Space : Key.None;
+                Input(Mathf.Abs(difference) < .25f ? 0 : Mathf.Sign(difference), action, false, f == 14 ? Key.LeftShift : Key.None);
                 if (f > 20 && world.IsGrounded && Mathf.Abs(difference) < .4f)
                 { Input(0); yield return null; yield break; }
                 yield return null;
@@ -215,7 +237,19 @@ namespace NivelCero.Tests
             Input(0, key); yield return null;
             Input(0); yield return null;
         }
-        void Input(float axis, Key extra = Key.None, bool fire = false)
+        float NearestSafe(float x)
+        {
+            float best = x, bestDistance = float.MaxValue;
+            for (float candidate = 78.6f; candidate <= 88.5f; candidate += .25f)
+            {
+                if (!world.IsPositionSafe(candidate)) continue;
+                float d = Mathf.Abs(candidate - x);
+                if (d < bestDistance) { bestDistance = d; best = candidate; }
+            }
+            return best;
+        }
+
+        void Input(float axis, Key extra = Key.None, bool fire = false, Key second = Key.None)
         {
             frames++;
             Assert.That(frames, Is.LessThan(12000), State());
@@ -223,6 +257,7 @@ namespace NivelCero.Tests
             var keys = new List<Key>();
             if (axis > .1f) keys.Add(Key.D); else if (axis < -.1f) keys.Add(Key.A);
             if (extra != Key.None) keys.Add(extra);
+            if (second != Key.None) keys.Add(second);
             Vector3 target = world.GameCamera.WorldToScreenPoint(world.GuardianPosition);
             InputSystem.QueueStateEvent(keyboard, new KeyboardState(keys.ToArray()));
             InputSystem.QueueStateEvent(mouse, new MouseState { position = new Vector2(target.x, target.y), buttons = (ushort)(fire ? 1 : 0) });

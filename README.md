@@ -1,6 +1,6 @@
 # Nivel Cero Escape del Glitch
 
-Entrega funcional Unity 0.6.0 para Windows, con Sector de Arranque 3D y escena académica 2D. La versión web 0.5 original se conserva intacta.
+Entrega Unity 0.7.0 para Windows, con Sector de Arranque 3D y escena académica 2D. La 0.7 suma una dirección artística común (`Docs/Arte/DIRECCION_ARTISTICA.md`), arte 2D y audio originales generados por código, un Guardián 2D completo, composición e iluminación 3D por zonas y una interfaz unificada. La versión web 0.5 original se conserva intacta.
 
 ## Jugar
 
@@ -8,7 +8,7 @@ Abrir `JUGAR_VERSION_UNITY.bat` o `Entrega/01_Videojuego3D/Windows/NivelCero.exe
 
 En el menú, `Nueva partida` inicia 3D y `Escena académica 2D` abre la alternativa con Tilemap. `Continuar` restaura progreso 3D. El lanzador original `JUGAR_NIVEL_CERO.bat` sigue abriendo WebGL 0.5.
 
-Controles 3D: WASD, mouse, Espacio salto, Shift dash, Ctrl agacharse, V FPS/TPS, C hombro, 1 blaster, 2 espada, clic izquierdo atacar, clic derecho apuntar/bloquear, R recargar, E Bit/terminal, Esc pausa. En 2D: A/D, Espacio, Shift, mouse, clic izquierdo,1/2,E,Esc.
+Controles 3D: WASD, mouse, Espacio salto, Shift dash, Ctrl agacharse, V FPS/TPS, C hombro, 1 blaster, 2 espada, clic izquierdo atacar, clic derecho apuntar/bloquear, R recargar, E Bit/terminal, Esc pausa. En 2D: A/D o flechas, Espacio o W (mantener = salto más alto), Shift, mouse, clic izquierdo, 1/2, E, Esc. Opciones en ambas escenas: volumen general, música, efectos y reducir efectos.
 
 ## Archivos de entrega
 
@@ -16,13 +16,13 @@ Controles 3D: WASD, mouse, Espacio salto, Shift dash, Ctrl agacharse, V FPS/TPS,
 - `Entrega/01_Videojuego3D/Nivel_Cero_Unity.zip`: proyecto editable compartido por ambas escenas.
 - `Entrega/02_Escena2D/`: instrucciones de escena académica y referencias a su código/assets.
 - `Entrega/03_GDD/`: GDD editable Word y PDF.
-- `Entrega/04_Gameplay/`: grabaciones reales 3D/2D del framebuffer Unity y audio del juego. El 3D dura 1 min 51 s a 1080p/30 fps.
+- `Entrega/04_Gameplay/`: grabaciones 0.7 del framebuffer Unity con el audio del juego, ambas a 1080p/30 fps y en tiempo real: 2D de 1 min 15 s (recorrido largo con Bit, pasarela opcional, caída y reaparición, hack con error, pausa, jefe completo y victoria) y 3D de 1 min 4 s (recorrido completo).
 - `Entrega/05_Portafolio/`: bitácora, capturas y resultados verificables.
 - `Entrega/06_Presentacion/index.html`: presentación offline de 14 diapositivas, navegación y notas. También hay PDF, guion de 20 minutos y preguntas técnicas.
 
 ## Abrir y modificar
 
-Agregar la carpeta `Unity` a Unity Hub, con Editor 6000.3.28f1. Assets, Packages y ProjectSettings están versionados. La escena 3D contiene geometría, modelos, iluminación y navegación editables; el constructor sigue disponible en `Nivel Cero > Construir escena 3D editable`. La escena 2D construye su Tilemap y entidades desde `Academic2D` al ejecutarse.
+Agregar la carpeta `Unity` a Unity Hub, con Editor 6000.3.28f1. Assets, Packages y ProjectSettings están versionados. La escena 3D contiene geometría, modelos, iluminación y navegación editables; el constructor sigue disponible en `Nivel Cero > Construir escena 3D editable`. La escena 2D guarda seis Tilemaps editables (`Nivel Cero > Construir escena 2D editable` los regenera); sus entidades se crean desde `Academic2D` al ejecutarse.
 
 Los modelos originales y 14 clips de Zero están en `Art/Models`; la fuente Blender y el generador están en `Tools/Art`. La fuente Rajdhani conserva OFL. No se compraron assets ni se incorporaron modelos comerciales.
 

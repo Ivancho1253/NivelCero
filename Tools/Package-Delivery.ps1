@@ -5,7 +5,7 @@ $deliveryRoot = Join-Path $projectRoot 'Entrega'
 $archivePath = Join-Path $deliveryRoot '01_Videojuego3D/Nivel_Cero_Unity.zip'
 $releasePath = Join-Path $projectRoot 'Unity/Builds/Windows'
 if (!(Test-Path -LiteralPath (Join-Path $releasePath 'NivelCero.exe'))) { throw 'Build the Windows release first.' }
-if (Get-Process Unity -ErrorAction SilentlyContinue) { throw 'Close the project Editor before packaging its source.' }
+if (Get-Process Unity -ErrorAction SilentlyContinue | Where-Object { $_.Path -like '*\Editor\Unity.exe' }) { throw 'Close the project Editor before packaging its source.' }
 & (Join-Path $PSScriptRoot 'Check-Project.ps1')
 
 $windowsDelivery = Join-Path $deliveryRoot '01_Videojuego3D/Windows'

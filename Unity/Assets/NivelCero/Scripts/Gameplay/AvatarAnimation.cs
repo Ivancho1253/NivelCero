@@ -51,19 +51,24 @@ namespace NivelCero
                 return;
             }
             Animator.speed = 1;
-            if (Time.unscaledTime < actionUntil) return;
+            if (Time.unscaledTime < actionUntil) { Animator.speed = 1; return; }
             Keyboard keys = Keyboard.current;
             if (keys != null && keys.eKey.wasPressedThisFrame) { Action("Interact", .7f); return; }
             var body = Motor.GetComponent<CharacterController>();
             Vector3 speed = Motor.Velocity;
             float planarSpeed = new Vector2(speed.x, speed.z).magnitude;
-            if (planarSpeed > 15) { Play("Dash", .04f); return; }
+            if (planarSpeed > 15) { Animator.speed = 1; Play("Dash", .04f); return; }
             if (body != null && !body.isGrounded)
             {
+                Animator.speed = 1;
                 Play(speed.y > .5f ? "Jump" : "Fall", .08f);
                 return;
             }
-            Play(planarSpeed < .15f ? "Idle" : planarSpeed < 3.8f ? "Walk" : "Run", .13f);
+            // Match leg cadence to ground speed to remove foot sliding. Natural speeds
+            // measured from the Blender clips: Walk ≈1.35 m/s, Run ≈2.9 m/s per cycle.
+            string state = planarSpeed < .15f ? "Idle" : planarSpeed < 2.2f ? "Walk" : "Run";
+            Play(state, .13f);
+            Animator.speed = state == "Walk" ? Mathf.Clamp(planarSpeed / 1.35f, .6f, 1.8f) : state == "Run" ? Mathf.Clamp(planarSpeed / 2.9f, .8f, 2.4f) : 1;
         }
 
         private void OnPerformed(string state)

@@ -1,6 +1,6 @@
 # Bitácora verificable de desarrollo
 
-Nivel Cero: Escape del Glitch · corte documental: 16 de noviembre de 2026
+Nivel Cero: Escape del Glitch · corte documental: 16 de noviembre de 2026 (incluye la versión 0.7, §8)
 
 Se registran acciones y resultados respaldados por archivos locales. No se asignan horas de trabajo, autores, integrantes, sprints celebrados, revisiones humanas ni responsabilidades no acreditadas. Los documentos anteriores de `Docs/` contienen estados iniciales de la migración; cuando dicen que Unity estaba ausente o que ciertas pruebas estaban pendientes, describen esa etapa y no el resultado posterior registrado aquí.
 
@@ -96,3 +96,47 @@ Los Markdown son fuentes editables complementarias. Las exportaciones Word/PDF s
 8. Revisar pulido de animación, montaje de armas, materiales y mezcla de audio con observación real.
 
 El progreso técnico demostrado es sustancial: ambas escenas tienen una condición de victoria alcanzada. El estado de calidad final y los entregables académicos se evalúan con estas limitaciones visibles.
+
+## 8. Versión 0.7: dirección artística, personajes, audio e interfaz (16 de noviembre de 2026)
+
+**Entorno.** El Editor de Unity no estaba instalado en esta PC. Con autorización se instalaron Unity Hub 3.22.6 (winget, paquete MSIX) y el Editor 6000.3.28f1. La licencia Personal se activó desde Unity Hub. Como el Hub MSIX guarda la licencia en su carpeta aislada (`%LOCALAPPDATA%\Packages\UnityTechnologies.UnityHub_…\LocalCache\Local\Unity\licenses`), se copió a `%LOCALAPPDATA%\Unity\licenses` para que el Editor en modo batch la encuentre.
+
+| Etapa | Acción real | Evidencia o consecuencia |
+|---|---|---|
+| Dirección artística | Guía breve de paleta, formas, jerarquía, tipografía, glitch y señales. | `Docs/Arte/DIRECCION_ARTISTICA.md` |
+| Arte 2D | Generador original de pixel art: Zero, brazo apuntado, Bit, Guardián (3 variantes), FX, tileset de 32 piezas, parallax, portal, firewall y retratos. Revisión visual de las láminas; se corrigieron apoyo de pies, torso, cable y celda del brazo. | `Tools/Art/generate_2d_art.py`, `Docs/Arte/hoja_*.png` |
+| Audio | Generador original de 51 WAV: música de exploración y combate con fundido, ambiente, efectos por función y voces. Se midieron picos y uniones de bucle. | `Tools/Audio/generate_audio.py`, `Docs/Arte/AUDIO.md` |
+| Sistemas compartidos | `SoundBank`, `MusicDirector`, `GameSettings` (volumen de música y efectos separados, reducir efectos), `UiTheme`. | Scripts `Audio/` y `UI/` |
+| Escena 2D | Reescrita en partes: juego, nivel, jefe e interfaz; `Bit2D` con `Rigidbody2D` cinemático y triggers; animador de sprites; Tilemaps horneados y editables. | GDD §14 |
+| Escena 3D | Iluminación por zonas, piso sin neón, techo con vigas, umbrales, contenedores, arena con anillo y pilones, siluetas de enemigos propias, luz de contorno de Zero, checkpoint con estado, presentación y giro del Guardián, arma en 1ª persona corregida, Bit según la cámara, cadencia de piernas según la velocidad. | GDD §16, `Docs/Arte/ANTES_DESPUES.md` |
+| Incidencias | El horneado 2D guardó Tilemaps vacíos (Unity descargó los Tile al abrir la escena): se recargan tras abrirla y se valida que el suelo no quede vacío. Se agregó también una regeneración en ejecución. El blaster de 1ª persona quedaba en el origen de la cámara sin dispositivos de entrada: se posiciona antes de leerlos. Un primer reescalado del blaster (×2,2) se descartó tras verlo en render. | Renders `Tests/results/review3d` |
+| Grabación 2D | Un primer intento de grabación en reproductor Windows se interrumpió (el reproductor se cerró a los 397 cuadros). No se usó como evidencia. | — |
+
+### Pruebas de la 0.7 (Unity 6000.3.28f1, Editor en modo batch)
+
+| Archivo en `Tests/results/` | Resultado | Alcance |
+|---|---|---|
+| `editmode-0.7.xml` | 10/10 | Núcleo, datos y tres integraciones 2D (Tilemap/física, circuito y firewall, fallo del hack). |
+| `playmode-integration-0.7.xml` | 11/11 | Movimiento, cámara, armas, hack, escudo, muerte/respawn, guardado. |
+| `fullroute-0.7.xml` | 1/1 | Recorrido 3D completo con entradas normales y la geometría nueva: vida final 86, 2 fragmentos, 4 hacks, 38 disparos, 2.081 cuadros. |
+| `fullscene-0.7.xml` | 1/1 | Inicialización y render de la escena 3D. |
+| `academic-fullroute-0.7.xml` | 1/1 | Recorrido 2D sin respawn con el jefe nuevo: el bot sólo esquiva por marcas y onda visibles; vida final 100, 1.774 cuadros. |
+| `academic-showcase-editor.xml` | 1/1 | Recorrido 2D largo: Bit, pasarela opcional, caída y respawn, validación prematura, pausa, jefe y victoria (3 fragmentos, 1 caída). |
+| `review2d.xml`, `review3d.xml` | 1/1 cada una | Renders de revisión. La 2D comprueba que la cápsula y el sprite de Zero apoyan en el piso. |
+
+Una ejecución de todas las suites PlayMode juntas se canceló: la escena 3D de la prueba de humo quedaba cargada y se mezclaba con los fixtures de integración (dos AudioListener). Por eso las suites se ejecutan por separado, igual que en la 0.6. Estas pruebas no sustituyen partidas humanas.
+
+### Videos, build y entrega 0.7
+
+- **Grabaciones.** Primer intento 2D: el reproductor de pruebas procesaba teclado y mouse reales sin foco, y lo tipeado en la PC llegó como saltos. Las pruebas ahora desactivan los dispositivos físicos mientras corren. Primer intento 3D: falló porque la sesión 3D se pausó al perder el foco. Se agregó `Session.PauseWhenUnfocused`, que sólo la automatización desactiva. Además, la codificación PNG pasó a hilos aparte: las grabaciones finales corren en tiempo real (2D: 2.185 cuadros, 74,65 s de reloj y 74,67 s de juego; 3D: 1.851 cuadros, 63,64 s y 63,81 s).
+- **Videos.** `Nivel_Cero_Gameplay_2D.mp4`: 74,7 s. `Nivel_Cero_Gameplay_3D.mp4`: 63,672 s. Ambos a 1920×1080, 30 fps, AAC 48 kHz (FFprobe). Pico de audio del 2D: −1,6 dBFS, sin saturación.
+- **Build.** `ProjectSetup.BuildWindows` (0.7.0): Result Success. El release arrancó en una prueba de 15 s con Direct3D 12 y RTX 4060, sin excepciones en el registro. El SHA256 de `NivelCero.exe` coincide con el de la 0.6 porque es el lanzador genérico de Unity; el contenido nuevo está en `NivelCero_Data`.
+- **Entrega.** `Package-Delivery.ps1`: verificación aprobada (233 GUID únicos, 2 escenas, WebGL original intacto), ZIP fuente de 522 entradas y `SHA256SUMS.txt` regenerado. Se ajustaron dos scripts de herramientas: `Package-Delivery.ps1` sólo detecta el Editor real (no el `unity.exe` del Hub) y `Check-Project.ps1` tiene un respaldo si `rg` no está instalado.
+
+### Pendientes de la 0.7
+
+1. Partidas humanas: comodidad, lectura en movimiento, dificultad del Guardián 2D y 3D, ritmo, mezcla de audio y opción "Reducir efectos".
+2. Regenerar `Entrega/03_GDD/*.docx/pdf` y la presentación desde el GDD Markdown actualizado; esas exportaciones siguen siendo de la 0.6.
+3. El Guardián 3D conserva su modelo y su mecánica (escudo por hack); se mejoró su presentación, sus estados visuales y su sonido, pero no tiene animaciones esqueletales nuevas.
+4. Los enemigos 3D son ensamblajes de primitivas con diseño propio, no modelos de Blender.
+5. Partida completa del release fuera de las pruebas (sólo se acreditó el arranque).

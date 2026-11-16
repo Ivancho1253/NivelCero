@@ -18,7 +18,7 @@ namespace NivelCero
         public Guardian Boss;
         public GameObject AccessDoor;
         public bool WorldIsBaked;
-        public Material CyanMaterial, RedMaterial;
+        public Material CyanMaterial, RedMaterial, ExposedMaterial;
         public bool InMenu = true, Paused, Defeat, Victory;
         public bool Blocked { get { return InMenu || Paused || Defeat || Victory || Puzzle != null; } }
         public CircuitPuzzle Puzzle { get; private set; }
@@ -26,6 +26,9 @@ namespace NivelCero
         public string Message = "Bit: Zero, despertá. GL1TCH está corrompiendo el sistema.";
         public float MessageUntil;
         float hackRemaining;
+        bool hurtHooked;
+        /// <summary>1 right after Zero takes damage, fading to 0 (HUD vignette).</summary>
+        public float HurtFlash;
         int attempts;
         public float HackRemaining { get { return hackRemaining; } }
         public int Attempts { get { return attempts; } }
@@ -40,8 +43,9 @@ namespace NivelCero
         }
         void Start()
         {
+            SoundBank.Ensure(); GameSettings.Apply();
             if (!WorldIsBaked) new SectorBuilder().Build(this);
-            else { SectorBuilder.Cyan = CyanMaterial; SectorBuilder.Red = RedMaterial; }
+            else { SectorBuilder.Cyan = CyanMaterial; SectorBuilder.Red = RedMaterial; SectorBuilder.Exposed = ExposedMaterial; }
             SyncCursor();
         }
         void Update()
@@ -50,8 +54,10 @@ namespace NivelCero
             if (k != null && k.escapeKey.wasPressedThisFrame)
             {
                 if (Puzzle != null) CancelHack(true);
-                else if (!InMenu && !Defeat && !Victory) Paused = !Paused;
+                else if (!InMenu && !Defeat && !Victory) { Paused = !Paused; SoundBank.Play(Paused ? "pause_in" : "pause_out"); }
             }
+            if (PlayerHealth != null && !hurtHooked) { PlayerHealth.Hurt += (amount, origin) => { SoundBank.Play("hurt", .9f); HurtFlash = 1; }; hurtHooked = true; }
+            HurtFlash = Mathf.Max(0, HurtFlash - Time.unscaledDeltaTime * 2);
             if (!Blocked)
             {
                 Progress.elapsedSeconds += Time.deltaTime;
@@ -64,7 +70,9 @@ namespace NivelCero
             }
             SyncCursor();
         }
-        void OnApplicationFocus(bool focus) { if (!focus && !InMenu) Paused = true; }
+        /// <summary>Players get an automatic pause on focus loss; automation can opt out.</summary>
+        [NonSerialized] public bool PauseWhenUnfocused = true;
+        void OnApplicationFocus(bool focus) { if (PauseWhenUnfocused && !focus && !InMenu) Paused = true; }
         void OnDestroy() { Time.timeScale = 1; if (I == this) I = null; Cursor.lockState = CursorLockMode.None; Cursor.visible = true; }
         void SyncCursor()
         {
@@ -72,7 +80,12 @@ namespace NivelCero
             Cursor.lockState = Blocked ? CursorLockMode.None : CursorLockMode.Locked;
             Cursor.visible = Blocked;
         }
-        public void Notify(string text) { Message = text; MessageUntil = Time.unscaledTime + 6; }
+        public void Notify(string text)
+        {
+            Message = text; MessageUntil = Time.unscaledTime + Mathf.Clamp(text.Length * .07f, 4, 8);
+            if (text.StartsWith("Bit:")) BitFollower.React();
+            else if (text.StartsWith("GL1TCH")) SoundBank.Play("glitch_voice", .8f, 1, .03f, .4f);
+        }
         public void StartGame(bool load)
         {
             Progress = new ProgressData();
@@ -112,11 +125,13 @@ namespace NivelCero
         public void Checkpoint(int id)
         {
             if (id <= Progress.checkpointId) return;
-            Progress.checkpointId = id; PlayerHealth.Restore(); Save(); Notify("Checkpoint guardado. Integridad restaurada.");
+            Progress.checkpointId = id; PlayerHealth.Restore(); Save(); Notify("Bit: checkpoint sincronizado. Integridad restaurada.");
+            SoundBank.Play("checkpoint");
         }
-        public void PlayerDied() { if (Defeat || Victory || InMenu) return; CancelHack(false); Defeat = true; Notify("La señal de Zero se perdió."); }
+        public void PlayerDied() { if (Defeat || Victory || InMenu) return; CancelHack(false); Defeat = true; Notify("La señal de Zero se perdió."); SoundBank.Play("death"); }
         public void Respawn()
         {
+            if (Defeat) SoundBank.Play("respawn");
             Defeat = false; Paused = false;
             Player.Respawn(SpawnPoints[Progress.checkpointId]); PlayerHealth.Restore();
             foreach (var pulse in FindObjectsByType<HostilePulse>(FindObjectsSortMode.None)) Destroy(pulse.gameObject);
@@ -129,25 +144,28 @@ namespace NivelCero
             if (terminal.BossTerminal && (Progress.bossDefeated || !Progress.RequiredFragmentsRecovered))
             { Notify("Bit: recuperá los dos fragmentos principales antes de intervenir el escudo."); return; }
             ActiveTerminal = terminal; Puzzle = new CircuitPuzzle(terminal.Seed + attempts, terminal.Size);
+            SoundBank.Play("terminal_open");
             hackRemaining = terminal.TimeLimit;
         }
         public void ValidateHack()
         {
             if (Puzzle == null) return;
-            if (!Puzzle.IsSolved) { Notify("Circuito abierto: conectá origen y destino antes de validar."); return; }
+            if (!Puzzle.IsSolved) { Notify("Circuito abierto: conectá origen y destino antes de validar."); SoundBank.Play("hack_error"); return; }
             var target = ActiveTerminal; Puzzle = null; ActiveTerminal = null;
-            target.Succeed(); attempts++; Tone.Play(700, .14f);
+            target.Succeed(); attempts++; SoundBank.Play("hack_success");
         }
         public void CancelHack(bool failure)
         {
             if (Puzzle == null) return;
-            if (failure) { ActiveTerminal.LockedUntil = Time.time + 5; Notify("Alarma: terminal bloqueada durante 5 s."); attempts++; }
+            if (failure) { ActiveTerminal.LockedUntil = Time.time + 5; Notify("GL1TCH: alarma activada. Terminal bloqueada durante 5 s."); attempts++; SoundBank.Play("alarm"); SoundBank.Play("hack_error"); }
+            else SoundBank.Play("ui_back");
             Puzzle = null; ActiveTerminal = null;
         }
         public void Complete()
         {
             if (!Progress.CanExit) { Notify("Faltan los dos fragmentos principales o derrotar al Guardián."); return; }
             Victory = true; Save(); Notify("Bit: el Sector de Arranque está libre. Memoria Fragmentada nos espera.");
+            SoundBank.Play("portal_enter");
         }
         public void ReloadLevel() { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     }
