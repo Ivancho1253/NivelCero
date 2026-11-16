@@ -7,5 +7,9 @@ Unity/Builds/
 Unity/*.csproj
 Unity/*.sln*
 Tests/results/
+Tests/*.log
+Unity/*.log
+Evidence/
+Tools/ArtifactBuild/
 .vs/
 *.tmp

@@ -12,6 +12,8 @@ namespace NivelCero
         public int Magazine = 18;
         public int Ammo { get; private set; }
         public bool Reloading { get; private set; }
+        public bool IsBlade { get { return blade; } }
+        public event System.Action<string> Performed;
         public string WeaponName { get { return blade ? "Energy Blade" : "Pulse Blaster"; } }
         public bool Blocking { get { return blade && !Reloading && Session.I != null && !Session.I.Blocked &&
                     Mouse.current != null && Mouse.current.rightButton.isPressed; } }
@@ -21,6 +23,7 @@ namespace NivelCero
         private float nextAttack, comboUntil;
         private int combo;
         private Transform gunVisual, bladeVisual;
+        private Transform worldGun, worldBlade;
         private Material cyan;
         private AudioSource audioSource;
         private AudioClip shotSound, bladeSound, reloadSound;
@@ -38,24 +41,60 @@ namespace NivelCero
 
         private void Start()
         {
-            // These are explicitly provisional assembled weapon meshes, not final authored assets.
             Shader shader = Shader.Find("Universal Render Pipeline/Lit");
             if (shader == null) shader = Shader.Find("Standard");
             cyan = new Material(shader);
             cyan.color = new Color(.05f, .8f, 1);
             cyan.EnableKeyword("_EMISSION");
             cyan.SetColor("_EmissionColor", new Color(.05f, .8f, 1) * 2);
-            gunVisual = MakeWeapon("Pulse Blaster [PROVISIONAL]", new Vector3(.16f, .13f, .48f));
-            bladeVisual = MakeWeapon("Energy Blade [PROVISIONAL]", new Vector3(.045f, .8f, .06f));
+            var assets = GameAssets.Load();
+            gunVisual = MakeWeapon("Pulse Blaster", new Vector3(.16f, .13f, .48f), assets != null ? assets.PulseBlaster : null);
+            bladeVisual = MakeWeapon("Energy Blade", new Vector3(.045f, .8f, .06f), assets != null ? assets.EnergyBlade : null);
+            var motor = GetComponent<PlayerMotor>();
+            Transform hand = motor != null && motor.Visual != null ? FindBone(motor.Visual, "Hand.R") : null;
+            if (hand != null && assets != null)
+            {
+                worldGun = MakeHeldWeapon(assets.PulseBlaster, hand, "Pulse Blaster · mano derecha", new Vector3(90, 0, 0));
+                worldBlade = MakeHeldWeapon(assets.EnergyBlade, hand, "Energy Blade · mano derecha", new Vector3(0, 0, 0));
+            }
         }
 
-        private Transform MakeWeapon(string name, Vector3 scale)
+        private Transform FindBone(Transform root, string name)
         {
+            if (root.name == name) return root;
+            foreach (Transform child in root)
+            {
+                Transform result = FindBone(child, name);
+                if (result != null) return result;
+            }
+            return null;
+        }
+
+        private Transform MakeHeldWeapon(GameObject prefab, Transform parent, string name, Vector3 euler)
+        {
+            if (prefab == null) return null;
+            GameObject held = GameAssets.InstantiateVisual(prefab, parent, name);
+            held.transform.localRotation = Quaternion.Euler(euler);
+            held.transform.localPosition = new Vector3(0, .025f, 0);
+            foreach (Transform child in held.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
+            return held.transform;
+        }
+
+        private Transform MakeWeapon(string name, Vector3 scale, GameObject prefab)
+        {
+            Transform parent = View != null && View.Lens != null ? View.Lens.transform : transform;
+            if (prefab != null)
+            {
+                GameObject authored = GameAssets.InstantiateVisual(prefab, parent, name);
+                foreach (Transform child in authored.GetComponentsInChildren<Transform>(true)) child.gameObject.layer = 2;
+                return authored.transform;
+            }
+            // Fallback only for isolated tests or missing asset catalog.
             GameObject part = GameObject.CreatePrimitive(PrimitiveType.Cube);
-            part.name = name;
+            part.name = name + " [PROVISIONAL: falta catálogo]";
             Destroy(part.GetComponent<Collider>());
             part.layer = 2;
-            part.transform.SetParent(View != null && View.Lens != null ? View.Lens.transform : transform, false);
+            part.transform.SetParent(parent, false);
             part.transform.localScale = scale;
             part.GetComponent<Renderer>().sharedMaterial = cyan;
             return part.transform;
@@ -65,8 +104,12 @@ namespace NivelCero
         {
             if (View == null || View.Lens == null) return;
             bool blocked = Session.I == null || Session.I.Blocked || GetComponent<Health>().Dead;
-            if (gunVisual != null) gunVisual.gameObject.SetActive(!blocked && !blade);
-            if (bladeVisual != null) bladeVisual.gameObject.SetActive(!blocked && blade);
+            bool cameraGun = View.FirstPerson || worldGun == null;
+            bool cameraBlade = View.FirstPerson || worldBlade == null;
+            if (gunVisual != null) gunVisual.gameObject.SetActive(!blocked && !blade && cameraGun);
+            if (bladeVisual != null) bladeVisual.gameObject.SetActive(!blocked && blade && cameraBlade);
+            if (worldGun != null) worldGun.gameObject.SetActive(!blocked && !blade && !View.FirstPerson);
+            if (worldBlade != null) worldBlade.gameObject.SetActive(!blocked && blade && !View.FirstPerson);
             if (blocked) return;
             Keyboard keys = Keyboard.current;
             Mouse mouse = Mouse.current;
@@ -87,7 +130,7 @@ namespace NivelCero
                 bladeVisual.localRotation = Quaternion.Euler(0, 0, Blocking ? 65 : Mathf.Sin(swing * Mathf.PI) * -100);
             }
             bool attack = blade ? mouse.leftButton.wasPressedThisFrame : mouse.leftButton.isPressed;
-            if (!attack || Reloading || Time.time < nextAttack || Blocking || Cursor.lockState != CursorLockMode.Locked) return;
+            if (!attack || Reloading || Time.time < nextAttack || Blocking || (!Application.isBatchMode && Cursor.lockState != CursorLockMode.Locked)) return;
             if (blade) Swing();
             else Shoot();
         }
@@ -95,6 +138,7 @@ namespace NivelCero
         private IEnumerator Reload()
         {
             Reloading = true;
+            if (Performed != null) Performed("Reload");
             audioSource.PlayOneShot(reloadSound);
             yield return new WaitForSeconds(1.25f);
             Ammo = Magazine;
@@ -110,6 +154,7 @@ namespace NivelCero
                 return;
             }
             Ammo--;
+            if (Performed != null) Performed("Shoot");
             Transform camera = View.Lens.transform;
             RaycastHit hit;
             Vector3 destination = camera.position + camera.forward * 100;
@@ -117,7 +162,7 @@ namespace NivelCero
             if (Physics.Raycast(camera.position, camera.forward, out hit, 100, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             {
                 destination = hit.point;
-                target = hit.collider.GetComponentInParent<Health>();
+                target = DamageTarget(hit.collider);
             }
             // Second ray starts at the avatar muzzle. Shoulder cameras cannot shoot around walls.
             Vector3 chest = transform.position + Vector3.up * 1.25f;
@@ -136,7 +181,7 @@ namespace NivelCero
                 Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
             {
                 destination = hit.point;
-                target = hit.collider.GetComponentInParent<Health>();
+                target = DamageTarget(hit.collider);
             }
             if (target != null && target != GetComponent<Health>()) target.Damage(20, muzzle);
             Trace(muzzle, destination, new Color(.1f, .9f, 1));
@@ -149,13 +194,14 @@ namespace NivelCero
             combo = Time.time > comboUntil ? 0 : (combo + 1) % 3;
             comboUntil = Time.time + .85f;
             nextAttack = Time.time + (combo == 2 ? .55f : .34f);
+            if (Performed != null) Performed("Melee" + (combo + 1));
             Vector3 start = transform.position + Vector3.up * 1.05f;
             HashSet<Health> struck = new HashSet<Health>();
             Collider[] contacts = Physics.OverlapSphere(start + AimForward * 1.2f, 1.3f,
                 Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore);
             foreach (Collider contact in contacts)
             {
-                Health target = contact.GetComponentInParent<Health>();
+                Health target = DamageTarget(contact);
                 if (target == null || target == GetComponent<Health>() || struck.Contains(target)) continue;
                 Vector3 nearest = contact.ClosestPoint(start);
                 Vector3 toward = nearest - start;
@@ -183,6 +229,14 @@ namespace NivelCero
             line.sharedMaterial = cyan;
             line.startColor = line.endColor = color;
             Destroy(effect, .08f);
+        }
+
+        private static Health DamageTarget(Collider collider)
+        {
+            var hitbox = collider.GetComponent<DamageHitbox>();
+            if (hitbox != null) return hitbox.Target;
+            var health = collider.GetComponentInParent<Health>();
+            return health != null && health.GetComponent<Guardian>() != null ? null : health;
         }
 
         private AudioClip Tone(string name, float frequency, float duration)

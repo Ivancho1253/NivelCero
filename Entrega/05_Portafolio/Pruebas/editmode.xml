@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="10" result="Passed" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-16 04:18:27Z" end-time="2026-11-16 04:18:28Z" duration="0,2507638">
+  <test-suite type="TestSuite" id="1000" name="Nivel Cero - Escape del Glitch" fullname="Nivel Cero - Escape del Glitch" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-16 04:18:27Z" end-time="2026-11-16 04:18:28Z" duration="0.250764" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="EditMode" />
+    </properties>
+    <test-suite type="Assembly" id="1013" name="NivelCero.Core.EditorTests.dll" fullname="C:/Users/Carlos/Downloads/NivelCero_3D_v0_5/Unity/Library/ScriptAssemblies/NivelCero.Core.EditorTests.dll" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.209894" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="46496" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="EditMode" />
+        <property name="EditorOnly" value="True" />
+      </properties>
+      <test-suite type="TestSuite" id="1014" name="NivelCero" fullname="NivelCero" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.209576" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1015" name="Tests" fullname="NivelCero.Tests" runstate="Runnable" testcasecount="10" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.209421" total="10" passed="10" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="AcademicPlayModeTests" fullname="NivelCero.Tests.AcademicPlayModeTests" classname="NivelCero.Tests.AcademicPlayModeTests" runstate="Runnable" testcasecount="3" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.199049" total="3" passed="3" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1003" name="CircuitMustConnectBeforeTerminalDisablesFirewall" fullname="NivelCero.Tests.AcademicPlayModeTests.CircuitMustConnectBeforeTerminalDisablesFirewall" methodname="CircuitMustConnectBeforeTerminalDisablesFirewall" classname="NivelCero.Tests.AcademicPlayModeTests" runstate="Runnable" seed="2140787716" result="Passed" start-time="2026-11-16 04:18:22Z" end-time="2026-11-16 04:18:24Z" duration="1.958074" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+            </test-case>
+            <test-case id="1004" name="FailedHackClosesInterfaceAndKeepsDefensesActive" fullname="NivelCero.Tests.AcademicPlayModeTests.FailedHackClosesInterfaceAndKeepsDefensesActive" methodname="FailedHackClosesInterfaceAndKeepsDefensesActive" classname="NivelCero.Tests.AcademicPlayModeTests" runstate="Runnable" seed="550882936" result="Passed" start-time="2026-11-16 04:18:24Z" end-time="2026-11-16 04:18:26Z" duration="1.892262" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+              </properties>
+              <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+            </test-case>
+            <test-case id="1002" name="PlayerLandsOnTilemapAndPhysicalFirewallStopsMovement" fullname="NivelCero.Tests.AcademicPlayModeTests.PlayerLandsOnTilemapAndPhysicalFirewallStopsMovement" methodname="PlayerLandsOnTilemapAndPhysicalFirewallStopsMovement" classname="NivelCero.Tests.AcademicPlayModeTests" runstate="Runnable" seed="1715751040" result="Passed" start-time="2026-11-16 04:18:26Z" end-time="2026-11-16 04:18:28Z" duration="1.837254" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+There are no audio listeners in the scene. Please ensure there is always one audio listener in the scene
+]]></output>
+            </test-case>
+          </test-suite>
+          <test-suite type="TestFixture" id="1005" name="CoreEditModeTests" fullname="NivelCero.Tests.CoreEditModeTests" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" testcasecount="7" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.009275" total="7" passed="7" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1012" name="CollectionIsIdempotentAndCorruptProgressIsRejected" fullname="NivelCero.Tests.CoreEditModeTests.CollectionIsIdempotentAndCorruptProgressIsRejected" methodname="CollectionIsIdempotentAndCorruptProgressIsRejected" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="1765726429" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.003784" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1011" name="ExitRequiresBothMainFragmentsAndBossButOptionalIsOptional" fullname="NivelCero.Tests.CoreEditModeTests.ExitRequiresBothMainFragmentsAndBossButOptionalIsOptional" methodname="ExitRequiresBothMainFragmentsAndBossButOptionalIsOptional" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="136415683" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.000239" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1009" name="NewPuzzlesAreScrambledDeterministicallyAndResetExactly" fullname="NivelCero.Tests.CoreEditModeTests.NewPuzzlesAreScrambledDeterministicallyAndResetExactly" methodname="NewPuzzlesAreScrambledDeterministicallyAndResetExactly" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="2079906680" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.002587" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1007" name="NonreciprocalNeighborDoesNotTransmitEnergy" fullname="NivelCero.Tests.CoreEditModeTests.NonreciprocalNeighborDoesNotTransmitEnergy" methodname="NonreciprocalNeighborDoesNotTransmitEnergy" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="1041600299" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.000367" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1008" name="PoweredDestinationStillNeedsAnEastFacingOutput" fullname="NivelCero.Tests.CoreEditModeTests.PoweredDestinationStillNeedsAnEastFacingOutput" methodname="PoweredDestinationStillNeedsAnEastFacingOutput" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="2083554413" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.000122" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1006" name="ReciprocalRoutePowersDestinationAndCompletes" fullname="NivelCero.Tests.CoreEditModeTests.ReciprocalRoutePowersDestinationAndCompletes" methodname="ReciprocalRoutePowersDestinationAndCompletes" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="599950348" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.000087" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+            </test-case>
+            <test-case id="1010" name="RotationAndCoordinateBoundsAreDefined" fullname="NivelCero.Tests.CoreEditModeTests.RotationAndCoordinateBoundsAreDefined" methodname="RotationAndCoordinateBoundsAreDefined" classname="NivelCero.Tests.CoreEditModeTests" runstate="Runnable" seed="1861569702" result="Passed" start-time="2026-11-16 04:18:28Z" end-time="2026-11-16 04:18:28Z" duration="0.001021" asserts="0">
+              <properties>
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/Carlos/AppData/LocalLow/Nivel Cero/Nivel Cero - Escape del Glitch\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

@@ -10,6 +10,12 @@ namespace NivelCero
         Session S { get { return Session.I; } }
         bool options, controls;
         GUIStyle heading, body;
+        GUISkin skin;
+        Texture2D panelTexture, buttonTexture, hoverTexture;
+        static Texture2D Solid(Color color)
+        {
+            var texture = new Texture2D(1, 1); texture.SetPixel(0, 0, color); texture.Apply(); return texture;
+        }
         void Start()
         {
             var v = S.Player.View;
@@ -17,15 +23,31 @@ namespace NivelCero
             v.Fov = PlayerPrefs.GetFloat("fov", 78);
             v.InvertY = PlayerPrefs.GetInt("invertY", 0) == 1;
             AudioListener.volume = PlayerPrefs.GetFloat("volume", .7f);
+            if (!Application.isEditor && PlayerPrefs.HasKey("screenWidth"))
+                Screen.SetResolution(PlayerPrefs.GetInt("screenWidth"), PlayerPrefs.GetInt("screenHeight"), PlayerPrefs.GetInt("fullscreen", 1) == 1);
+            if (PlayerPrefs.HasKey("quality")) QualitySettings.SetQualityLevel(Mathf.Clamp(PlayerPrefs.GetInt("quality"), 0, QualitySettings.names.Length - 1));
         }
         void OnGUI()
         {
             if (S == null || S.Player == null) return;
             if (heading == null)
             {
-                heading = new GUIStyle(GUI.skin.label) { fontSize = 28, fontStyle = FontStyle.Bold, wordWrap = true };
-                body = new GUIStyle(GUI.skin.label) { fontSize = 16, wordWrap = true };
+                skin = Instantiate(GUI.skin);
+                skin.font = Resources.Load<Font>("Fonts/Rajdhani-Regular");
+                panelTexture = Solid(new Color(.018f, .035f, .055f, .94f));
+                buttonTexture = Solid(new Color(.045f, .12f, .16f, .98f));
+                hoverTexture = Solid(new Color(.05f, .3f, .37f, 1));
+                skin.box.normal.background = panelTexture; skin.box.border = new RectOffset(1, 1, 1, 1);
+                skin.box.fontSize = 19; skin.box.normal.textColor = new Color(.5f, .9f, 1);
+                skin.button.normal.background = buttonTexture; skin.button.hover.background = hoverTexture;
+                skin.button.active.background = hoverTexture; skin.button.fontSize = 20;
+                skin.button.normal.textColor = new Color(.7f, .95f, 1);
+                skin.button.padding = new RectOffset(15, 15, 7, 7);
+                heading = new GUIStyle(skin.label) { fontSize = 36, font = Resources.Load<Font>("Fonts/Rajdhani-Bold"), wordWrap = true };
+                heading.normal.textColor = new Color(.55f, .95f, 1);
+                body = new GUIStyle(skin.label) { fontSize = 18, wordWrap = true };
             }
+            var previousSkin = GUI.skin; GUI.skin = skin;
             var saved = GUI.matrix;
             GUI.matrix = Matrix4x4.Scale(new Vector3(Screen.width / 1280f, Screen.height / 720f, 1));
             GUI.color = Color.white;
@@ -34,7 +56,7 @@ namespace NivelCero
                 GUI.Box(new Rect(0, 0, 1280, 720), "");
                 GUILayout.BeginArea(new Rect(340, 65, 600, 610));
                 GUILayout.Label("NIVEL CERO\nESCAPE DEL GLITCH", heading);
-                GUILayout.Label("Sector de Arranque · reconstrucción 0.6-dev\nArte provisional · ejecución Unity pendiente de verificar", body);
+                GUILayout.Label("SECTOR DE ARRANQUE // ZERO PROTOCOL\nUn sistema corrupto. Tu código es la salida.", body);
                 GUILayout.Space(22);
                 if (options) Options();
                 else if (controls)
@@ -97,6 +119,14 @@ namespace NivelCero
             if (Time.unscaledTime < S.MessageUntil || S.InMenu)
                 GUI.Label(new Rect(230, 650, 850, 65), S.Message, body);
             GUI.matrix = saved;
+            GUI.skin = previousSkin;
+        }
+        void OnDestroy()
+        {
+            if (skin != null) Destroy(skin);
+            if (panelTexture != null) Destroy(panelTexture);
+            if (buttonTexture != null) Destroy(buttonTexture);
+            if (hoverTexture != null) Destroy(hoverTexture);
         }
         void Options()
         {
@@ -117,6 +147,8 @@ namespace NivelCero
             {
                 PlayerPrefs.SetFloat("sensitivity", v.Sensitivity); PlayerPrefs.SetFloat("fov", v.Fov);
                 PlayerPrefs.SetInt("invertY", v.InvertY ? 1 : 0); PlayerPrefs.SetFloat("volume", AudioListener.volume); PlayerPrefs.Save(); options = false;
+                PlayerPrefs.SetInt("screenWidth", Screen.width); PlayerPrefs.SetInt("screenHeight", Screen.height);
+                PlayerPrefs.SetInt("fullscreen", Screen.fullScreen ? 1 : 0); PlayerPrefs.SetInt("quality", QualitySettings.GetQualityLevel()); PlayerPrefs.Save();
             }
         }
         void Hack()
@@ -144,6 +176,11 @@ namespace NivelCero
             if (GUI.Button(new Rect(750, 505, 180, 45), "CANCELAR / ESC")) S.CancelHack(true);
             GUI.Label(new Rect(330, 570, 620, 55), "ORIGEN: primera celda superior izquierda\nDESTINO: última celda inferior derecha", body);
         }
-        bool Button(string label) { return GUILayout.Button(label, GUILayout.MinHeight(36)); }
+        bool Button(string label)
+        {
+            bool pressed = GUILayout.Button(label, GUILayout.MinHeight(36));
+            if (pressed) Tone.Play(800, .045f);
+            return pressed;
+        }
     }
 }

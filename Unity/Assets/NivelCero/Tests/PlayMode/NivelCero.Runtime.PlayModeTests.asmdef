@@ -1,0 +1,7 @@
+{
+  "name": "NivelCero.Runtime.PlayModeTests",
+  "rootNamespace": "NivelCero.Tests",
+  "references": ["NivelCero.Runtime", "NivelCero.Core", "Unity.InputSystem", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime"],
+  "optionalUnityReferences": ["TestAssemblies"],
+  "autoReferenced": false
+}

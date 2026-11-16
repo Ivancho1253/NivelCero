@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1,5841511">
+  <test-suite type="TestSuite" id="1021" name="Nivel Cero - Escape del Glitch" fullname="Nivel Cero - Escape del Glitch" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1.584151" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+    <properties>
+      <property name="platform" value="PlayMode" />
+    </properties>
+    <test-suite type="Assembly" id="1015" name="NivelCero.Runtime.PlayModeTests.dll" fullname="C:/Users/Carlos/Downloads/NivelCero_3D_v0_5/Unity/Library/ScriptAssemblies/NivelCero.Runtime.PlayModeTests.dll" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1.578515" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+      <properties>
+        <property name="_PID" value="42944" />
+        <property name="_APPDOMAIN" value="Unity Child Domain" />
+        <property name="platform" value="PlayMode" />
+        <property name="EditorOnly" value="False" />
+      </properties>
+      <test-suite type="TestSuite" id="1016" name="NivelCero" fullname="NivelCero" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1.578067" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+        <properties />
+        <test-suite type="TestSuite" id="1017" name="Tests" fullname="NivelCero.Tests" runstate="Runnable" testcasecount="12" result="Passed" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1.577782" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+          <properties />
+          <test-suite type="TestFixture" id="1001" name="FullSceneSmokeTests" fullname="NivelCero.Tests.FullSceneSmokeTests" classname="NivelCero.Tests.FullSceneSmokeTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1.576858" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">
+            <properties />
+            <test-case id="1002" name="OriginalArtAndEntire3DSceneInitializeAndRender" fullname="NivelCero.Tests.FullSceneSmokeTests.OriginalArtAndEntire3DSceneInitializeAndRender" methodname="OriginalArtAndEntire3DSceneInitializeAndRender" classname="NivelCero.Tests.FullSceneSmokeTests" runstate="Runnable" seed="550045523" result="Passed" start-time="2026-11-16 04:25:19Z" end-time="2026-11-16 04:25:21Z" duration="1.570261" asserts="0">
+              <properties>
+                <property name="_JOINTYPE" value="UnityCombinatorial" />
+                <property name="retryIteration" value="0" />
+                <property name="repeatIteration" value="0" />
+              </properties>
+              <output><![CDATA[Saving results to: C:/Users/Carlos/AppData/LocalLow/Nivel Cero/Nivel Cero - Escape del Glitch\TestResults.xml
+]]></output>
+            </test-case>
+          </test-suite>
+        </test-suite>
+      </test-suite>
+    </test-suite>
+  </test-suite>
+</test-run>

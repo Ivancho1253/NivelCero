@@ -1,0 +1,16 @@
+# Preserve the shipped files byte for byte, including the checksum manifest.
+Entrega/** -text -diff
+# Normalize editable source; binary Unity assets remain detected as binary.
+Unity/** text=auto
+Docs/** text=auto
+Tools/** text=auto
+*.png binary
+*.fbx binary
+*.blend binary
+*.ttf binary
+*.zip binary
+*.pdf binary
+*.docx binary
+*.mp4 binary
+# Keep the publisher's license text unchanged.
+Unity/Assets/NivelCero/Resources/Fonts/OFL.txt -whitespace

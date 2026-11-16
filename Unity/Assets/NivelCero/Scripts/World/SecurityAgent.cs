@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace NivelCero
 {
@@ -12,17 +13,26 @@ namespace NivelCero
         Vector3 home, lastSeen;
         Health health;
         float clock, lostTime, attackClock;
-        CharacterController body;
+        NavMeshAgent navigation;
         void Start()
         {
             home = transform.position; health = GetComponent<Health>();
-            body = GetComponent<CharacterController>();
+            lostTime = 99;
+            if (Type == Kind.Ground)
+            {
+                navigation = gameObject.AddComponent<NavMeshAgent>();
+                navigation.speed = 2.4f; navigation.angularSpeed = 240; navigation.acceleration = 14;
+                navigation.radius = .4f; navigation.height = 1.8f; navigation.baseOffset = .5f;
+                navigation.stoppingDistance = 1.8f;
+                if (NavMesh.SamplePosition(transform.position, out var start, 3, NavMesh.AllAreas)) navigation.Warp(start.position);
+            }
             health.Died += () => { State = Mode.Dead; gameObject.SetActive(false); };
         }
         public void ResetEncounter()
         {
             if (health == null) return;
-            health.Restore(); transform.position = home; State = Mode.Patrol; lostTime = 0; attackClock = 1;
+            health.Restore(); transform.position = home; State = Mode.Patrol; lostTime = 99; attackClock = 1;
+            if (navigation != null && navigation.isOnNavMesh) { navigation.Warp(home); navigation.ResetPath(); }
         }
         void Update()
         {
@@ -37,6 +47,7 @@ namespace NivelCero
             if (visible) { lastSeen = target; lostTime = 0; } else lostTime += Time.deltaTime;
             if (State == Mode.Telegraph)
             {
+                if (navigation != null && navigation.isOnNavMesh) navigation.isStopped = true;
                 if (attackClock <= 0)
                 {
                     State = Mode.Attack;
@@ -57,12 +68,17 @@ namespace NivelCero
             State = visible ? Mode.Pursue : lostTime < 3 ? Mode.Investigate : Mode.Patrol;
             if (Type == Kind.Turret) return;
             var goal = State == Mode.Patrol ? home + new Vector3(Mathf.Sin(clock * .5f) * 2, 0, 0) : lastSeen;
+            if (navigation != null && navigation.isOnNavMesh)
+            {
+                navigation.isStopped = false;
+                if (NavMesh.SamplePosition(goal, out var reachable, 3, NavMesh.AllAreas)) navigation.SetDestination(reachable.position);
+                return;
+            }
             var direction = goal - transform.position; direction.y = 0;
             if (direction.magnitude < (Type == Kind.Drone && visible ? 7 : .4f)) return;
             direction.Normalize();
             var move = direction * (Type == Kind.Drone ? 3 : 2.4f) * Time.deltaTime;
-            if (body != null) body.Move(move + Vector3.down * 8 * Time.deltaTime);
-            else if (!Physics.SphereCast(transform.position, .6f, direction, out _, move.magnitude + .2f, 1 << 0)) transform.position += move;
+            if (!Physics.SphereCast(transform.position, .6f, direction, out _, move.magnitude + .2f, 1 << 0)) transform.position += move;
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), Time.deltaTime * 5);
         }
     }

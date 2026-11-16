@@ -45,5 +45,12 @@ namespace NivelCero
             if (Died != null) Died();
             if (GetComponent<PlayerMotor>() != null && Session.I != null) Session.I.PlayerDied();
         }
+
+        public void Heal(float amount)
+        {
+            if (Dead || amount <= 0) return;
+            Current = Mathf.Min(Maximum, Current + amount);
+            if (Changed != null) Changed(Current);
+        }
     }
 }

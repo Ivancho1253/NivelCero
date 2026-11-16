@@ -22,6 +22,7 @@ namespace NivelCero
         private void Awake()
         {
             controller = GetComponent<CharacterController>();
+            controller.minMoveDistance = 0; // Preserve movement at very high frame rates too.
             gameObject.layer = 2; // Ignore Raycast: gameplay traces cannot hit their own player.
             standingHeight = controller.height;
             standingCenter = controller.center;
@@ -68,6 +69,7 @@ namespace NivelCero
             if (jumpBuffer > 0 && coyote > 0 && !crouch)
             {
                 vertical = Mathf.Sqrt(2 * 24 * JumpHeight);
+                Tone.Play(280, .08f, transform.position);
                 coyote = jumpBuffer = 0;
             }
             if ((keys.leftShiftKey.wasPressedThisFrame || keys.rightShiftKey.wasPressedThisFrame) && DashReady)
@@ -77,6 +79,7 @@ namespace NivelCero
                 dashCooldown = .85f;
                 if (!grounded) airDash = false;
                 vertical = Mathf.Max(vertical, 0);
+                Tone.Play(120, .18f, transform.position);
             }
             if (dashRemaining > 0)
             {
@@ -93,13 +96,17 @@ namespace NivelCero
             CollisionFlags collisions = controller.Move((planar + Vector3.up * vertical) * dt);
             if ((collisions & CollisionFlags.Above) != 0 && vertical > 0) vertical = 0;
             Velocity = dt > 0 ? (transform.position - before) / dt : Vector3.zero;
+            if (controller.isGrounded && planar.magnitude > 1)
+            {
+                stepCycle -= dt * planar.magnitude;
+                if (stepCycle <= 0) { Tone.Play(130, .04f, transform.position); stepCycle = 2.2f; }
+            }
 
             if (Visual != null)
             {
                 Vector3 facing = desired.sqrMagnitude > .01f ? desired : forward;
                 if (Mouse.current != null && Mouse.current.rightButton.isPressed) facing = forward;
                 Visual.rotation = Quaternion.Slerp(Visual.rotation, Quaternion.LookRotation(facing), 16 * dt);
-                stepCycle += planar.magnitude * dt;
             }
             if (transform.position.y < -18 && Session.I != null) Session.I.PlayerDied();
         }

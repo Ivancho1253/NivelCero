@@ -1,0 +1,11 @@
+﻿{
+    "CapturedUtc":  "2026-11-16T16:28:33.4304714Z",
+    "Executable":  "C:\\Users\\Carlos\\Downloads\\NivelCero_3D_v0_5\\Unity\\Builds\\Windows\\NivelCero.exe",
+    "Sha256":  "FBD073CA59C4918EDBC6704F5393CF59021173AF11714C00DB4212C50117492B",
+    "RuntimeAssemblySha256":  "5E87CC7FE3F96AA8DB70C4CA67F5D96C1CBDD059AC0B1CAA6E137EA8E7F42A19",
+    "Graphics":  "Direct3D:\r;     Version:         Direct3D 12 [level 12.2]\r;     Renderer:        NVIDIA GeForce RTX 4060 (ID=0x2882)\r",
+    "StartupObserved":  true,
+    "ObservedSeconds":  45.91,
+    "UnhandledExceptions":  0,
+    "Validation":  "Final release launched independently. Startup only; complete routes separately passed in Windows test players."
+}

@@ -36,6 +36,7 @@ namespace NivelCero.Editor
             if (input != null && input.intValue != 1) { input.intValue = 1; settings.ApplyModifiedPropertiesWithoutUndo(); }
             PlayerSettings.companyName = "Nivel Cero"; PlayerSettings.productName = "Nivel Cero - Escape del Glitch";
             PlayerSettings.defaultScreenWidth = 1920; PlayerSettings.defaultScreenHeight = 1080;
+            PlayerSettings.bundleVersion = "0.6.0";
             PlayerSettings.colorSpace = ColorSpace.Linear;
             PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
             EditorBuildSettings.scenes = new[] {
@@ -61,6 +62,7 @@ namespace NivelCero.Editor
                 if (!exists) { int index = shaders.arraySize; shaders.InsertArrayElementAtIndex(index); shaders.GetArrayElementAtIndex(index).objectReferenceValue = shader; }
             }
             graphics.ApplyModifiedPropertiesWithoutUndo(); AssetDatabase.SaveAssets();
+            ArtSetup.Import();
             Debug.Log("Nivel Cero: configuración preparada. Esto no constituye una prueba de gameplay.");
         }
         [MenuItem("Nivel Cero/Compilar Windows x64")]
@@ -70,7 +72,7 @@ namespace NivelCero.Editor
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions {
                 scenes = Array.ConvertAll(EditorBuildSettings.scenes, scene => scene.path),
                 locationPathName = "Builds/Windows/NivelCero.exe", target = BuildTarget.StandaloneWindows64,
-                options = BuildOptions.Development
+                options = BuildOptions.None
             });
             if (report.summary.result != BuildResult.Succeeded) throw new Exception("Build failed: " + report.summary.result);
         }

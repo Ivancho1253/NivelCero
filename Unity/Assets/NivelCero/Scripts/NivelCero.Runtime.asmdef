@@ -1,0 +1,6 @@
+{
+  "name": "NivelCero.Runtime",
+  "rootNamespace": "NivelCero",
+  "references": ["NivelCero.Core", "Unity.InputSystem", "Unity.AI.Navigation", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime"],
+  "autoReferenced": true
+}

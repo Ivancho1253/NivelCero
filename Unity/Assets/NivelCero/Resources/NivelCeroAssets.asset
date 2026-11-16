@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841669284a64bae4782f5beb428ab4bd, type: 3}
+  m_Name: NivelCeroAssets
+  m_EditorClassIdentifier: NivelCero.Runtime::NivelCero.GameAssets
+  Zero: {fileID: 919132149155446097, guid: 8574ec411740cfe4d960275818ef2fae, type: 3}
+  PulseBlaster: {fileID: 919132149155446097, guid: 23c339615627a6746a46111e4fce659b, type: 3}
+  EnergyBlade: {fileID: 919132149155446097, guid: 4ba7b46c59443674a818a86602098524, type: 3}
+  Guardian: {fileID: 919132149155446097, guid: 6925d51299adcb348a04c4f71acbc43c, type: 3}
+  Bit: {fileID: 919132149155446097, guid: beb0b0447a6f28e40b07d1f364d66fd4, type: 3}
+  Terminal: {fileID: 919132149155446097, guid: 73062a12f17a63645b1b0e82b6023be5, type: 3}
+  WallPanel: {fileID: 919132149155446097, guid: 211e42afe6e61ac44989634389c24a30, type: 3}
+  FloorPanel: {fileID: 919132149155446097, guid: dc36d8794e4fda44a93013d065d8c6ed, type: 3}
+  Pillar: {fileID: 919132149155446097, guid: 6d88d535609dbb04bbcdbc6f4b1283f9, type: 3}
+  Pipe: {fileID: 919132149155446097, guid: 78f2d975cbc0fc74abe525b229bc9785, type: 3}
+  Crate: {fileID: 919132149155446097, guid: 693f52818f6a63f42a948d6ee8d82da1, type: 3}
+  ZeroAnimator: {fileID: 9100000, guid: 786dd6fd4a28ca347b9ba59d16bb60df, type: 2}
+  ZeroAvatar: {fileID: 9000000, guid: 8574ec411740cfe4d960275818ef2fae, type: 3}

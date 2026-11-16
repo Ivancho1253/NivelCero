@@ -1,4 +1,6 @@
-# Auditoría y decisiones · 16 de noviembre de 2026
+# Auditoría inicial y actualización de cierre · 16 de noviembre de 2026
+
+**Lectura histórica:** las secciones iniciales registran lo encontrado antes de instalar Unity y reconstruir el juego. El apartado final actualiza los resultados posteriores. Las frases sobre herramientas ausentes, pruebas pendientes o arte faltante pertenecen a aquella primera inspección. Para evidencia vigente, consultar `VALIDACION.md`.
 
 ## Material recibido
 
@@ -30,7 +32,7 @@ SHA256: `5A5F1A7C40162129C00F85637A6397B1AFB556F279EFAF88EAAEF4EE638D3613`.
 
 Git inicializado localmente. Commit `4e8f046` conserva los ocho archivos originales. No se configuró remoto ni se hizo push.
 
-## Entorno y elección técnica
+## Entorno y elección técnica de la primera etapa
 
 No se encontró Unity Editor, Unity Hub o Blender en PATH, ubicaciones habituales o registro de aplicaciones. Hay runtime .NET y compilador de Windows Framework, pero no SDK .NET. El usuario indicó preparar el proyecto **sin instalar**. No se descargaron herramientas ni recursos comerciales.
 
@@ -58,3 +60,17 @@ No se incorporaron assets externos. El atlas 2D proviene de `Tools/GenerateTiles
 ## Continuidad académica
 
 Se mantienen Zero, Bit, GL1TCH y el Guardián; Sector de Arranque, Memoria Fragmentada, Torre Firewall y Núcleo Corrupto conservan su identidad narrativa. No se implementan cuatro niveles. Salto/dash enseñan competencia; rutas laterales aportan autonomía y riesgo/recompensa; Bit sostiene relación y contexto. Mecánicas → dinámicas → estéticas: circuitos/combate/exploración buscan decisiones, dominio, desafío y descubrimiento. Su equilibrio y Flow deben verificarse con partidas reales.
+
+## Actualización posterior: implementación y evidencia de cierre
+
+Tras la autorización posterior se instalaron y utilizaron Unity **6000.3.28f1**, Hub **3.22.6**, CLI **1.0**, licencia Personal activa, Blender **4.5.10 LTS** y FFmpeg **9.0.1**. El proyecto resolvió paquetes y se ejecutó en el motor. La versión actual reemplaza la fijación inicial 6000.3.3f1; el inventario de ausencia se conserva sólo como historial.
+
+Se añadieron modelos/rig/clips originales Blender, materiales URP, música sintetizada adaptativa, tipografía Rajdhani con OFL incluida, navegación terrestre AI Navigation/NavMesh y defensas de arena. Las cámaras siguen siendo C# propio. El nivel se ensambla por código; no se presenta como campaña de cuatro niveles ni como composición completamente convertida a autoría manual por prefabs.
+
+Resultados: Core 7.619 aserciones/160 circuitos; EditMode 10/10; integración 11/11; escena 3D 1/1; recorrido 3D Editor 1/1 y Windows 1/1; recorrido 2D Editor 1/1 y Windows 1/1. La repetición de una suite Windows conjunta terminó 2/2. La primera ejecución había registrado un fallo 2D de finalización del jefe; se corrigió una interferencia de pausa por foco en el fixture sin editar vida, daño ni progreso. Logs y XML están identificados en `VALIDACION.md`.
+
+El release sin tests existe en `Entrega/01_Videojuego3D/Windows/NivelCero.exe`. Arranque independiente comprobado con Direct3D / RTX 4060 y 0 excepciones no controladas observadas. No equivale a un playtest humano completo; los recorridos fuera del Editor corresponden a reproductores de pruebas con entradas normales.
+
+Se generaron videos reales del framebuffer Unity: 3D 1920×1080, H.264 a 30 fps codificados, AAC 48 kHz, 111,502417 s; 2D 1078×904, mismos codecs/frecuencias, 30,887583 s. Hay GDD Word/PDF y presentación offline HTML/PDF de 14 diapositivas. No se atribuyen exposición oral realizada ni aprobación docente a esos archivos.
+
+Se añadió una muestra breve a 1080p sin grabación: 59,87 FPS promedio y P95 de 16,99 ms en i5-14600KF con RTX 4060. El informe `Docs/Entrega/Rendimiento.md` distingue cadencia real de tiempo simulado. Siguen pendientes controles/ritmo/combate con personas, profiling CPU/GPU extenso, otras configuraciones, duración humana de 10–20 minutos y cotejo de AE1/AE2/AE3/AE4 originales. La aceptación del 3D como entrega principal continúa sujeta al docente.

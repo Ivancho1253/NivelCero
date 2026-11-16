@@ -17,6 +17,8 @@ namespace NivelCero
         public Health PlayerHealth;
         public Guardian Boss;
         public GameObject AccessDoor;
+        public bool WorldIsBaked;
+        public Material CyanMaterial, RedMaterial;
         public bool InMenu = true, Paused, Defeat, Victory;
         public bool Blocked { get { return InMenu || Paused || Defeat || Victory || Puzzle != null; } }
         public CircuitPuzzle Puzzle { get; private set; }
@@ -27,11 +29,21 @@ namespace NivelCero
         int attempts;
         public float HackRemaining { get { return hackRemaining; } }
         public int Attempts { get { return attempts; } }
-        public string SavePath { get { return Path.Combine(Application.persistentDataPath, "nivel-cero-v1.json"); } }
+        [NonSerialized] public string SavePathOverride;
+        public string SavePath { get { return string.IsNullOrEmpty(SavePathOverride) ? Path.Combine(Application.persistentDataPath, "nivel-cero-v1.json") : SavePathOverride; } }
         public readonly Vector3[] SpawnPoints = {new Vector3(0, 1, 2), new Vector3(0, 1, 44), new Vector3(0, 1, 83)};
 
-        void Awake() { I = this; }
-        void Start() { new SectorBuilder().Build(this); SyncCursor(); }
+        void Awake()
+        {
+            I = this;
+            if (!Application.isEditor) { QualitySettings.vSyncCount = 0; Application.targetFrameRate = 60; }
+        }
+        void Start()
+        {
+            if (!WorldIsBaked) new SectorBuilder().Build(this);
+            else { SectorBuilder.Cyan = CyanMaterial; SectorBuilder.Red = RedMaterial; }
+            SyncCursor();
+        }
         void Update()
         {
             var k = Keyboard.current;
@@ -77,6 +89,7 @@ namespace NivelCero
             Progress.checkpointId = Mathf.Clamp(Progress.checkpointId, 0, SpawnPoints.Length - 1);
             InMenu = Paused = Defeat = Victory = false;
             ApplyProgress(); Respawn();
+            if (!load) Notify("Bit: Zero, despertaste en el Sector de Arranque. GL1TCH está corrompiendo el sistema. Reuní dos fragmentos y abrí la salida.");
         }
         public void ApplyProgress()
         {
@@ -112,7 +125,9 @@ namespace NivelCero
         }
         public void BeginHack(Terminal terminal)
         {
-            if (Blocked || Time.time < terminal.LockedUntil) return;
+            if (terminal == null || Blocked || Time.time < terminal.LockedUntil) return;
+            if (terminal.BossTerminal && (Progress.bossDefeated || !Progress.RequiredFragmentsRecovered))
+            { Notify("Bit: recuperá los dos fragmentos principales antes de intervenir el escudo."); return; }
             ActiveTerminal = terminal; Puzzle = new CircuitPuzzle(terminal.Seed + attempts, terminal.Size);
             hackRemaining = terminal.TimeLimit;
         }

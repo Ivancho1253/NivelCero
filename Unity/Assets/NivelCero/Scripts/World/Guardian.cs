@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 namespace NivelCero
 {
@@ -11,16 +12,36 @@ namespace NivelCero
         public float VulnerableRemaining;
         float attackTime = 2;
         Vector3 markedTarget;
+        int exposedPhase;
         public Renderer Core;
         void Start()
         {
             Health = GetComponent<Health>(); Health.Maximum = 360; Health.Restore(); Health.Invulnerable = true;
+            Health.Hurt += (damage, origin) =>
+            {
+                if (!Health.Dead && !Shielded && Phase != exposedPhase)
+                {
+                    Shielded = true; Health.Invulnerable = true; VulnerableRemaining = 0;
+                    Session.I.Notify("GL1TCH: restaurando defensa. Fase " + Phase + ". Reconectá un nodo para exponer el núcleo.");
+                }
+            };
             Health.Died += () =>
             {
                 Session.I.Progress.bossDefeated = true; Session.I.Save();
                 Session.I.Notify("Guardián desactivado. Portal abierto: escapá del Sector de Arranque.");
-                Tone.Play(120, .7f, transform.position); gameObject.SetActive(false);
+                Tone.Play(120, .7f, transform.position); StartCoroutine(Collapse());
             };
+        }
+        IEnumerator Collapse()
+        {
+            Vector3 initial = transform.localScale;
+            for (float t = 0; t < 1; t += Time.unscaledDeltaTime / 1.5f)
+            {
+                transform.localScale = Vector3.Scale(initial, new Vector3(1, Mathf.Lerp(1, .3f, t), 1));
+                transform.rotation = Quaternion.Euler(0, 0, t * 15);
+                yield return null;
+            }
+            gameObject.SetActive(false);
         }
         public void ResetEncounter()
         {
@@ -31,7 +52,7 @@ namespace NivelCero
         public void ExposeCore()
         {
             if (!gameObject.activeSelf) return;
-            Active = true; Shielded = false; Health.Invulnerable = false; VulnerableRemaining = 18;
+            Active = true; Shielded = false; Health.Invulnerable = false; VulnerableRemaining = 18; exposedPhase = Phase;
         }
         void Update()
         {

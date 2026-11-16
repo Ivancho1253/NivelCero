@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<test-run id="2" testcasecount="1" result="Passed" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0" engine-version="3.5.0.0" clr-version="4.0.30319.42000" start-time="0001-01-01 00:00:00Z" end-time="0001-01-01 00:00:00Z" duration="10,0251473">
+  <test-suite type="TestSuite" id="1000" name="Nivel Cero - Escape del Glitch" fullname="Nivel Cero - Escape del Glitch" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-11-16 04:42:34Z" end-time="2026-11-16 04:42:45Z" duration="10.025147" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+<properties><property name="platform" value="PlayMode"></property></properties><test-suite type="Assembly" id="1019" name="NivelCero.Runtime.PlayModeTests.dll" fullname="C:/Users/Carlos/Downloads/NivelCero_3D_v0_5/Unity/Builds/Tests/NivelCeroTests.exe/PlayerWithTests/PlayerWithTests_Data/Managed/NivelCero.Runtime.PlayModeTests.dll" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-11-16 04:42:34Z" end-time="2026-11-16 04:42:45Z" duration="10.015930" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+<properties><property name="_PID" value="42608"></property><property name="_APPDOMAIN" value="Unity Root Domain"></property><property name="platform" value="PlayMode"></property><property name="EditorOnly" value="False"></property></properties><test-suite type="TestSuite" id="1020" name="NivelCero" fullname="NivelCero" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-11-16 04:42:34Z" end-time="2026-11-16 04:42:45Z" duration="10.014404" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+<properties></properties><test-suite type="TestSuite" id="1021" name="Tests" fullname="NivelCero.Tests" runstate="Runnable" testcasecount="14" result="Passed" start-time="2026-11-16 04:42:34Z" end-time="2026-11-16 04:42:45Z" duration="10.013408" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+<properties></properties><test-suite type="TestFixture" id="1003" name="FullRoutePlaythroughTests" fullname="NivelCero.Tests.FullRoutePlaythroughTests" classname="NivelCero.Tests.FullRoutePlaythroughTests" runstate="Runnable" testcasecount="1" result="Passed" start-time="2026-11-16 04:42:34Z" end-time="2026-11-16 04:42:45Z" duration="10.006618" total="1" passed="1" failed="0" inconclusive="0" skipped="0" asserts="0">ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+<properties></properties><test-case id="1004" name="SectorDeArranqueCanBeCompletedThroughNormalActions" fullname="NivelCero.Tests.FullRoutePlaythroughTests.SectorDeArranqueCanBeCompletedThroughNormalActions" methodname="SectorDeArranqueCanBeCompletedThroughNormalActions" classname="NivelCero.Tests.FullRoutePlaythroughTests" runstate="Runnable" seed="1199361840" result="Passed" start-time="2026-11-16 04:42:35Z" end-time="2026-11-16 04:42:45Z" duration="9.998879" asserts="0">ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+<properties><property name="_JOINTYPE" value="UnityCombinatorial"></property><property name="Timeout" value="240000"></property><property name="retryIteration" value="0"></property><property name="repeatIteration" value="0"></property></properties><output>ROUTE INPUT: batch=False cursor=Locked keyboard=True mouse=True focus=True
+ROUTE: Entrenamiento: aproximación al primer salto pos=(0.00, 0.86, 2.00) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=0,1
+ROUTE: Salto y dash sobre el primer vacío pos=(0.00, 0.08, 18.22) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=2,7
+ROUTE: Recuperar primer fragmento principal pos=(0.00, 2.76, 25.03) hp=100 fragments=0 checkpoint=0 bossHp=360 shield=True time=3,0
+ROUTE: Combate contra Drone pos=(0.00, 0.09, 30.68) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=3,7
+ROUTE: Plataformas hacia seguridad pos=(0.00, 0.08, 30.95) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=4,6
+ROUTE: Cruzar segundo salto pos=(0.00, 0.08, 33.19) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,0
+ROUTE: Checkpoint de seguridad pos=(0.00, 2.51, 39.11) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,4
+ROUTE: Aterrizar en el checkpoint de seguridad pos=(0.00, 2.64, 43.69) hp=100 fragments=1 checkpoint=0 bossHp=360 shield=True time=5,8
+ROUTE: Acceso restringido pos=(0.00, 0.08, 43.97) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=6,2
+ROUTE: Terminal de acceso pos=(1.97, 0.08, 48.68) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,1
+ROUTE: Abrir el firewall mediante circuitos pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salida del firewall pos=(2.07, 0.08, 50.73) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=7,4
+ROUTE: Salto al bloque de exploración pos=(0.24, 0.08, 54.01) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=8,0
+ROUTE: Combate contra Ground pos=(0.17, 0.08, 61.14) hp=100 fragments=1 checkpoint=1 bossHp=360 shield=True time=9,6
+ROUTE: Acceso a la ruta lateral entre pilares pos=(0.05, 0.08, 61.11) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=10,5
+ROUTE: Salto lateral por el hueco entre pilares pos=(4.00, 0.08, 62.40) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,2
+ROUTE: Recuperar segundo fragmento principal pos=(9.88, 2.51, 62.54) hp=82 fragments=1 checkpoint=1 bossHp=360 shield=True time=11,5
+ROUTE: Retorno por el puente lateral pos=(12.11, 0.08, 69.71) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=12,9
+ROUTE: Despejar acceso al checkpoint pos=(11.04, 0.08, 78.18) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,2
+ROUTE: Checkpoint anterior al Guardián pos=(8.31, 0.08, 78.97) hp=82 fragments=2 checkpoint=1 bossHp=360 shield=True time=14,7
+ROUTE: Aterrizar en el checkpoint de la arena pos=(0.27, 0.08, 82.87) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,1
+ROUTE: Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2
+AIM frame=0 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.14, 0.08, 82.93) hp=100 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,2 enemyHp=100 ammo=6 cameraPos=(0.20, 1.68, 82.90) cameraForward=(-0.90, 0.00, 0.44) cameraHit=Muro de contención exterior@(-23.50, 1.68, 94.58) muzzleHit=Muro de contención exterior@(-23.50, 1.68, 94.58)
+AIM frame=30 target=(5.00, 1.20, 85.00) Combate contra Turret pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=16,7 enemyHp=60 ammo=3 cameraPos=(0.02, 1.68, 82.99) cameraForward=(0.92, -0.09, 0.37) cameraHit=Seguridad · Turret@(4.31, 1.27, 84.72) muzzleHit=Seguridad · Turret@(4.31, 1.27, 84.72)
+ROUTE: Entrada a la arena pos=(0.02, 0.08, 82.99) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=17,0
+ROUTE: Nodo ALFA pos=(-5.86, 0.08, 94.72) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=19,1
+ROUTE: Desactivar escudo de fase 1 pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=True time=20,2
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.95, 0.08, 101.65) hp=86 fragments=2 checkpoint=2 bossHp=360 shield=False time=20,2
+ROUTE: Regresar a ALFA para siguiente fase pos=(3.80, 0.08, 102.29) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=22,5
+ROUTE: Desactivar escudo de fase 2 pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=True time=24,1
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.67, 0.08, 102.01) hp=86 fragments=2 checkpoint=2 bossHp=220 shield=False time=24,1
+ROUTE: Regresar a ALFA para siguiente fase pos=(-4.62, 0.08, 101.86) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=27,9
+ROUTE: Desactivar escudo de fase 3 pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=True time=28,3
+ROUTE: Atacar núcleo expuesto y esquivar descargas pos=(-6.65, 0.08, 101.94) hp=86 fragments=2 checkpoint=2 bossHp=100 shield=False time=28,3
+ROUTE: Cruzar la arena restaurada pos=(4.06, 0.08, 101.92) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=30,2
+ROUTE: Acceso al portal pos=(-5.81, 0.08, 117.72) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=33,2
+ROUTE: Escape del Sector de Arranque pos=(-0.25, 0.08, 122.80) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=34,5
+ROUTE COMPLETE: Escape del Sector de Arranque pos=(0.00, 0.08, 134.31) hp=86 fragments=2 checkpoint=2 bossHp=0 shield=False time=36,3 shots=37 hacks=4 frames=2182
+</output></test-case></test-suite></test-suite></test-suite></test-suite></test-suite>
+</test-run>

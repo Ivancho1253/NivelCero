@@ -1,0 +1,354 @@
+[
+  {
+    "asset": "Bit",
+    "bytes": 101836,
+    "mesh_count": 10,
+    "bounds_min_blender": [
+      -0.3580000102519989,
+      -0.3460405468940735,
+      -0.20999999344348907
+    ],
+    "bounds_max_blender": [
+      0.3580000102519989,
+      0.3460405468940735,
+      0.18000003695487976
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "Crate",
+    "bytes": 73052,
+    "mesh_count": 9,
+    "bounds_min_blender": [
+      -0.574999988079071,
+      -0.49300000071525574,
+      -7.657272504957291e-08
+    ],
+    "bounds_max_blender": [
+      0.574999988079071,
+      0.47000008821487427,
+      1.0450000762939453
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "DoorFrame",
+    "bytes": 81340,
+    "mesh_count": 10,
+    "bounds_min_blender": [
+      -1.7786891460418701,
+      -0.4984140694141388,
+      -5.294922189591489e-08
+    ],
+    "bounds_max_blender": [
+      1.7786891460418701,
+      0.3500000238418579,
+      3.450000047683716
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "EnergyBlade",
+    "bytes": 130844,
+    "mesh_count": 12,
+    "bounds_min_blender": [
+      -0.13500000536441803,
+      -0.04700000211596489,
+      -0.18000000715255737
+    ],
+    "bounds_max_blender": [
+      0.13500000536441803,
+      0.04400000721216202,
+      1.1399999856948853
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "FloorPanel",
+    "bytes": 170460,
+    "mesh_count": 23,
+    "bounds_min_blender": [
+      -2.0,
+      -2.0,
+      -0.34000033140182495
+    ],
+    "bounds_max_blender": [
+      2.0,
+      2.0,
+      0.05250028520822525
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "Guardian",
+    "bytes": 510972,
+    "mesh_count": 56,
+    "bounds_min_blender": [
+      -2.0181446075439453,
+      -1.0200001001358032,
+      0.019999917596578598
+    ],
+    "bounds_max_blender": [
+      2.0181446075439453,
+      0.7999992370605469,
+      4.200000286102295
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "Pillar",
+    "bytes": 63676,
+    "mesh_count": 8,
+    "bounds_min_blender": [
+      -0.42500001192092896,
+      -0.42500004172325134,
+      -6.924129536400869e-08
+    ],
+    "bounds_max_blender": [
+      0.42500001192092896,
+      0.42500004172325134,
+      3.575000047683716
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "Pipe",
+    "bytes": 125068,
+    "mesh_count": 11,
+    "bounds_min_blender": [
+      -0.32499998807907104,
+      -0.1419999897480011,
+      0.15000008046627045
+    ],
+    "bounds_max_blender": [
+      0.32499998807907104,
+      0.19500000774860382,
+      3.0
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "PulseBlaster",
+    "bytes": 134828,
+    "mesh_count": 19,
+    "bounds_min_blender": [
+      -0.08799999952316284,
+      -0.5270000696182251,
+      -0.1593591719865799
+    ],
+    "bounds_max_blender": [
+      0.08799999952316284,
+      0.13500000536441803,
+      0.27000001072883606
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "SafetyRail",
+    "bytes": 70780,
+    "mesh_count": 9,
+    "bounds_min_blender": [
+      -1.600000023841858,
+      -0.08000000566244125,
+      -1.303365415594726e-08
+    ],
+    "bounds_max_blender": [
+      1.600000023841858,
+      0.08000000566244125,
+      1.0750000476837158
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "SecurityDoor",
+    "bytes": 91356,
+    "mesh_count": 12,
+    "bounds_min_blender": [
+      -1.2197121381759644,
+      -0.1574999988079071,
+      -1.6284248616216246e-08
+    ],
+    "bounds_max_blender": [
+      1.2197121381759644,
+      0.09995225071907043,
+      3.0
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "Terminal",
+    "bytes": 117916,
+    "mesh_count": 16,
+    "bounds_min_blender": [
+      -0.5099999904632568,
+      -0.3449999988079071,
+      -5.294922189591489e-08
+    ],
+    "bounds_max_blender": [
+      0.5099999904632568,
+      0.32499998807907104,
+      1.5912822484970093
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "WallPanel",
+    "bytes": 116684,
+    "mesh_count": 16,
+    "bounds_min_blender": [
+      -2.0,
+      -0.4050002694129944,
+      -2.9325724071327386e-08
+    ],
+    "bounds_max_blender": [
+      2.0,
+      0.18000029027462006,
+      3.5
+    ],
+    "actions": [],
+    "bones": 0,
+    "clip_checks": []
+  },
+  {
+    "asset": "Zero",
+    "bytes": 2220076,
+    "mesh_count": 1,
+    "bounds_min_blender": [
+      -0.5719995498657227,
+      -0.24999989569187164,
+      0.01000004168599844
+    ],
+    "bounds_max_blender": [
+      0.5719995498657227,
+      0.3520001769065857,
+      1.8849997520446777
+    ],
+    "actions": [
+      "Zero_Rig|Zero_Rig|Dash",
+      "Zero_Rig|Zero_Rig|Death",
+      "Zero_Rig|Zero_Rig|Fall",
+      "Zero_Rig|Zero_Rig|Hurt",
+      "Zero_Rig|Zero_Rig|Idle",
+      "Zero_Rig|Zero_Rig|Interact",
+      "Zero_Rig|Zero_Rig|Jump",
+      "Zero_Rig|Zero_Rig|Melee1",
+      "Zero_Rig|Zero_Rig|Melee2",
+      "Zero_Rig|Zero_Rig|Melee3",
+      "Zero_Rig|Zero_Rig|Reload",
+      "Zero_Rig|Zero_Rig|Run",
+      "Zero_Rig|Zero_Rig|Shoot",
+      "Zero_Rig|Zero_Rig|Walk"
+    ],
+    "bones": 18,
+    "clip_checks": [
+      {
+        "clip": "Zero_Rig|Zero_Rig|Dash",
+        "first_frame": 1.0,
+        "last_frame": 10.0,
+        "sampled_pose_variation": 0.8579614720947584
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Death",
+        "first_frame": 1.0,
+        "last_frame": 32.0,
+        "sampled_pose_variation": 0.9902678290989684
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Fall",
+        "first_frame": 1.0,
+        "last_frame": 19.0,
+        "sampled_pose_variation": 0.019681304693222046
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Hurt",
+        "first_frame": 1.0,
+        "last_frame": 12.0,
+        "sampled_pose_variation": 0.33573146278220634
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Idle",
+        "first_frame": 1.0,
+        "last_frame": 61.0,
+        "sampled_pose_variation": 0.03489949554204941
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Interact",
+        "first_frame": 1.0,
+        "last_frame": 32.0,
+        "sampled_pose_variation": 0.90569101160213
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Jump",
+        "first_frame": 1.0,
+        "last_frame": 22.0,
+        "sampled_pose_variation": 0.890256341517671
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Melee1",
+        "first_frame": 1.0,
+        "last_frame": 18.0,
+        "sampled_pose_variation": 1.254339337348938
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Melee2",
+        "first_frame": 1.0,
+        "last_frame": 18.0,
+        "sampled_pose_variation": 1.2856543958187103
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Melee3",
+        "first_frame": 1.0,
+        "last_frame": 18.0,
+        "sampled_pose_variation": 1.0800810530781746
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Reload",
+        "first_frame": 1.0,
+        "last_frame": 39.0,
+        "sampled_pose_variation": 0.6816960424184799
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Run",
+        "first_frame": 1.0,
+        "last_frame": 25.0,
+        "sampled_pose_variation": 0.9025856218941053
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Shoot",
+        "first_frame": 1.0,
+        "last_frame": 8.0,
+        "sampled_pose_variation": 0.11408540606498718
+      },
+      {
+        "clip": "Zero_Rig|Zero_Rig|Walk",
+        "first_frame": 1.0,
+        "last_frame": 33.0,
+        "sampled_pose_variation": 0.6087614260322889
+      }
+    ]
+  }
+]

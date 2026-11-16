@@ -28,7 +28,7 @@ namespace NivelCero
             bool blocked = Session.I == null || Session.I.Blocked;
             Keyboard keys = Keyboard.current;
             Mouse mouse = Mouse.current;
-            if (!blocked && Cursor.lockState == CursorLockMode.Locked)
+            if (!blocked && (Cursor.lockState == CursorLockMode.Locked || Application.isBatchMode))
             {
                 if (mouse != null)
                 {

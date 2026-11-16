@@ -1,0 +1,130 @@
+{
+  "generator": "Tools/Art/generate_models.py",
+  "blender": "4.5.10 LTS",
+  "units": "metres",
+  "authoring": "Original procedural art created for Nivel Cero",
+  "external_assets": [],
+  "direction": "Blender front -Y, export forward -Z / up Y",
+  "zero_animation_clips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Jump",
+    "Fall",
+    "Dash",
+    "Shoot",
+    "Reload",
+    "Melee1",
+    "Melee2",
+    "Melee3",
+    "Hurt",
+    "Death",
+    "Interact"
+  ],
+  "loop_clips": [
+    "Idle",
+    "Walk",
+    "Run",
+    "Fall"
+  ],
+  "assets": [
+    {
+      "asset": "Zero",
+      "objects": 2,
+      "triangles": 17716,
+      "rigged": true,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "PulseBlaster",
+      "objects": 19,
+      "triangles": 3636,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "EnergyBlade",
+      "objects": 12,
+      "triangles": 4826,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "Guardian",
+      "objects": 56,
+      "triangles": 19368,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "Bit",
+      "objects": 10,
+      "triangles": 3268,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "Terminal",
+      "objects": 16,
+      "triangles": 3200,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "FloorPanel",
+      "objects": 23,
+      "triangles": 4836,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "WallPanel",
+      "objects": 16,
+      "triangles": 3136,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "Pillar",
+      "objects": 8,
+      "triangles": 1504,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "DoorFrame",
+      "objects": 10,
+      "triangles": 2136,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "SecurityDoor",
+      "objects": 12,
+      "triangles": 2384,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "Crate",
+      "objects": 9,
+      "triangles": 1692,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "Pipe",
+      "objects": 11,
+      "triangles": 4780,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    },
+    {
+      "asset": "SafetyRail",
+      "objects": 9,
+      "triangles": 1692,
+      "rigged": false,
+      "source": "Original procedural mesh, generate_models.py"
+    }
+  ]
+}

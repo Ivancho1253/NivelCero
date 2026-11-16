@@ -20,7 +20,13 @@ if ($scenes.Count -ne 2) { throw 'Expected both 3D and academic 2D scenes.' }
 foreach ($scene in $scenes) {
     $content = [IO.File]::ReadAllText($scene.FullName)
     foreach ($match in [regex]::Matches($content, 'guid: ([a-f0-9]{32})')) {
-        if (!$guids.ContainsKey($match.Groups[1].Value)) { throw "Unresolved scene GUID in $($scene.Name)" }
+        $reference = $match.Groups[1].Value
+        if ($reference.StartsWith('0000000000000000')) { continue }
+        if (!$guids.ContainsKey($reference)) {
+            $packageCache = Join-Path $projectRoot 'Unity/Library/PackageCache'
+            $packageMatch = if (Test-Path -LiteralPath $packageCache) { & rg -l --glob '*.meta' --fixed-strings "guid: $reference" $packageCache | Select-Object -First 1 }
+            if (!$packageMatch) { throw "Unresolved scene GUID $reference in $($scene.Name)" }
+        }
     }
 }
 $originals = @('CHANGELOG.txt','game.js','icon.svg','index.html','JUGAR_NIVEL_CERO.bat','LEEME_PRIMERO.txt','menu.png','style.css')
