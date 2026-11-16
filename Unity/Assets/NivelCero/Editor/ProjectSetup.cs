@@ -36,7 +36,7 @@ namespace NivelCero.Editor
             if (input != null && input.intValue != 1) { input.intValue = 1; settings.ApplyModifiedPropertiesWithoutUndo(); }
             PlayerSettings.companyName = "Nivel Cero"; PlayerSettings.productName = "Nivel Cero - Escape del Glitch";
             PlayerSettings.defaultScreenWidth = 1920; PlayerSettings.defaultScreenHeight = 1080;
-            PlayerSettings.bundleVersion = "0.6.0";
+            PlayerSettings.bundleVersion = "0.7.0";
             PlayerSettings.colorSpace = ColorSpace.Linear;
             PlayerSettings.SetScriptingBackend(UnityEditor.Build.NamedBuildTarget.Standalone, ScriptingImplementation.Mono2x);
             EditorBuildSettings.scenes = new[] {

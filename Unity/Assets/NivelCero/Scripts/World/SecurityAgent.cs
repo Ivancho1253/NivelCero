@@ -26,7 +26,8 @@ namespace NivelCero
                 navigation.stoppingDistance = 1.8f;
                 if (NavMesh.SamplePosition(transform.position, out var start, 3, NavMesh.AllAreas)) navigation.Warp(start.position);
             }
-            health.Died += () => { State = Mode.Dead; gameObject.SetActive(false); };
+            health.Died += () => { State = Mode.Dead; SoundBank.PlayAt("block_impact", transform.position, 1, 4, 40); gameObject.SetActive(false); };
+            health.Hurt += (amount, origin) => SoundBank.PlayAt("hit_enemy", transform.position, .9f, 3, 35);
         }
         public void ResetEncounter()
         {
@@ -53,9 +54,10 @@ namespace NivelCero
                     State = Mode.Attack;
                     if (Type == Kind.Ground)
                     {
+                        SoundBank.PlayAt("boss_slam", transform.position, .5f, 3, 25);
                         if (delta.magnitude < 2.7f && visible) s.PlayerHealth.Damage(18, transform.position);
                     }
-                    else HostilePulse.Spawn(eye + delta.normalized, lastSeen, 11, 14);
+                    else { HostilePulse.Spawn(eye + delta.normalized, lastSeen, 11, 14); SoundBank.PlayAt("enemy_shot", eye, 1, 4, 40); }
                     attackClock = Type == Kind.Turret ? 1.6f : 2.2f;
                 }
                 return;
@@ -63,7 +65,7 @@ namespace NivelCero
             if (visible && delta.magnitude < (Type == Kind.Ground ? 2.3f : 15) && attackClock <= 0)
             {
                 State = Mode.Telegraph; attackClock = .65f;
-                Tone.Play(240, .08f, eye); return;
+                SoundBank.PlayAt("boss_charge", eye, .55f, 3, 30, .05f); return;
             }
             State = visible ? Mode.Pursue : lostTime < 3 ? Mode.Investigate : Mode.Patrol;
             if (Type == Kind.Turret) return;

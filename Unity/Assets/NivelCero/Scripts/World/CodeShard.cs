@@ -13,7 +13,7 @@ namespace NivelCero
             if (Vector3.Distance(transform.position, Session.I.Player.transform.position + Vector3.up) > 1.7f) return;
             Session.I.Progress.Collect(Id); Session.I.Save();
             Session.I.Notify(Id == "fragment-optional" ? "Archivo opcional: GL1TCH fue una herramienta de reparación. ¿Qué lo corrompió?" : "Fragmento de Código recuperado.");
-            Tone.Play(950, .2f); gameObject.SetActive(false);
+            SoundBank.Play("fragment"); gameObject.SetActive(false);
         }
     }
 }

@@ -20,6 +20,8 @@ namespace NivelCero
         public Vector3 AimForward { get { return View != null && View.Lens != null ?
                     Vector3.ProjectOnPlane(View.Lens.transform.forward, Vector3.up).normalized : transform.forward; } }
         private bool blade;
+        /// <summary>Seconds of hit-marker feedback left for the HUD.</summary>
+        public float HitConfirm;
         private float nextAttack, comboUntil;
         private int combo;
         private Transform gunVisual, bladeVisual;
@@ -102,6 +104,7 @@ namespace NivelCero
 
         private void Update()
         {
+            HitConfirm = Mathf.Max(0, HitConfirm - Time.deltaTime);
             if (View == null || View.Lens == null) return;
             bool blocked = Session.I == null || Session.I.Blocked || GetComponent<Health>().Dead;
             bool cameraGun = View.FirstPerson || worldGun == null;
@@ -110,25 +113,28 @@ namespace NivelCero
             if (bladeVisual != null) bladeVisual.gameObject.SetActive(!blocked && blade && cameraBlade);
             if (worldGun != null) worldGun.gameObject.SetActive(!blocked && !blade && !View.FirstPerson);
             if (worldBlade != null) worldBlade.gameObject.SetActive(!blocked && blade && !View.FirstPerson);
-            if (blocked) return;
-            Keyboard keys = Keyboard.current;
-            Mouse mouse = Mouse.current;
-            if (keys == null || mouse == null) return;
-            if (keys.digit1Key.wasPressedThisFrame) blade = false;
-            if (keys.digit2Key.wasPressedThisFrame) blade = true;
-            if (keys.rKey.wasPressedThisFrame && !blade && !Reloading && Ammo < Magazine) StartCoroutine(Reload());
+            // View-model pose: lowered while reloading, recoil kick after each shot, gentle sway.
+            float kick = Mathf.Clamp01((nextAttack - Time.time) / .16f);
+            float bob = Mathf.Sin(Time.time * 2.1f) * .004f;
             if (gunVisual != null)
             {
-                float tilt = Reloading ? Mathf.Sin(Time.time * 9) * 35 : 0;
-                gunVisual.localPosition = new Vector3(.26f, -.23f, .52f);
-                gunVisual.localRotation = Quaternion.Euler(tilt, 0, 0);
+                float tilt = Reloading ? 28 + Mathf.Sin(Time.time * 9) * 10 : -kick * 6;
+                gunVisual.localPosition = new Vector3(.22f, -.2f + bob - (Reloading ? .08f : 0), .46f - kick * .05f);
+                gunVisual.localRotation = Quaternion.Euler(tilt, -4, 0);
             }
             if (bladeVisual != null)
             {
                 float swing = Mathf.Clamp01((nextAttack - Time.time) / .35f);
-                bladeVisual.localPosition = new Vector3(.32f - Mathf.Sin(swing * Mathf.PI) * .65f, -.19f, .65f);
+                bladeVisual.localPosition = new Vector3(.32f - Mathf.Sin(swing * Mathf.PI) * .65f, -.19f + bob, .65f);
                 bladeVisual.localRotation = Quaternion.Euler(0, 0, Blocking ? 65 : Mathf.Sin(swing * Mathf.PI) * -100);
             }
+            if (blocked) return;
+            Keyboard keys = Keyboard.current;
+            Mouse mouse = Mouse.current;
+            if (keys == null || mouse == null) return;
+            if (keys.digit1Key.wasPressedThisFrame && blade) { blade = false; SoundBank.Play("ui_move", 1, .8f); }
+            if (keys.digit2Key.wasPressedThisFrame && !blade) { blade = true; SoundBank.Play("ui_move", 1, 1.2f); }
+            if (keys.rKey.wasPressedThisFrame && !blade && !Reloading && Ammo < Magazine) StartCoroutine(Reload());
             bool attack = blade ? mouse.leftButton.wasPressedThisFrame : mouse.leftButton.isPressed;
             if (!attack || Reloading || Time.time < nextAttack || Blocking || (!Application.isBatchMode && Cursor.lockState != CursorLockMode.Locked)) return;
             if (blade) Swing();
@@ -139,7 +145,7 @@ namespace NivelCero
         {
             Reloading = true;
             if (Performed != null) Performed("Reload");
-            audioSource.PlayOneShot(reloadSound);
+            SoundBank.Play("shield_open", .7f, 1.3f);
             yield return new WaitForSeconds(1.25f);
             Ammo = Magazine;
             Reloading = false;
@@ -151,6 +157,7 @@ namespace NivelCero
             if (Ammo <= 0)
             {
                 Session.I.Notify("Sin energía en el cargador. Presioná R para recargar.");
+                SoundBank.Play("rotate", .8f, .7f, 0, .2f);
                 return;
             }
             Ammo--;
@@ -172,7 +179,7 @@ namespace NivelCero
             {
                 // A narrow obstacle between body and muzzle must not become an inside-collider ray origin.
                 Trace(chest, hit.point, new Color(.1f, .9f, 1));
-                audioSource.PlayOneShot(shotSound);
+                SoundBank.Play("blaster", .8f);
                 View.Recoil(.65f);
                 return;
             }
@@ -183,9 +190,11 @@ namespace NivelCero
                 destination = hit.point;
                 target = DamageTarget(hit.collider);
             }
-            if (target != null && target != GetComponent<Health>()) target.Damage(20, muzzle);
+            if (target != null && target != GetComponent<Health>()) { target.Damage(20, muzzle); HitConfirm = .12f; }
+            else if (hit.collider != null && hit.collider.GetComponentInParent<Guardian>() != null && hit.collider.GetComponentInParent<Guardian>().Shielded)
+                SoundBank.PlayAt("deflect", destination, .8f, 3, 40);
             Trace(muzzle, destination, new Color(.1f, .9f, 1));
-            audioSource.PlayOneShot(shotSound);
+            SoundBank.Play("blaster", .8f);
             View.Recoil(.65f);
         }
 
@@ -211,10 +220,10 @@ namespace NivelCero
                     Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore) &&
                     obstruction.collider.GetComponentInParent<Health>() != target) continue;
                 struck.Add(target);
-                target.Damage(combo == 2 ? 45 : 28, start);
+                target.Damage(combo == 2 ? 45 : 28, start); HitConfirm = .12f;
                 Trace(start, nearest, new Color(.3f, 1, .9f));
             }
-            audioSource.PlayOneShot(bladeSound);
+            SoundBank.Play("blade", .9f, combo == 2 ? .85f : 1);
             View.Recoil(.3f);
         }
 

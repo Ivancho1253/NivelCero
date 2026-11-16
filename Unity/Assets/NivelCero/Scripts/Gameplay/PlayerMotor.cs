@@ -14,7 +14,8 @@ namespace NivelCero
         public Vector3 Velocity { get; private set; }
         private CharacterController controller;
         private float vertical, coyote, jumpBuffer, dashRemaining, dashCooldown, stepCycle;
-        private bool airDash = true;
+        private bool airDash = true, wasGrounded = true;
+        private float lastFall;
         private Vector3 planar, dashDirection;
         private float standingHeight;
         private Vector3 standingCenter;
@@ -42,6 +43,8 @@ namespace NivelCero
             Vector3 right = Vector3.Cross(Vector3.up, forward);
             Vector3 desired = forward * raw.y + right * raw.x;
             bool grounded = controller.isGrounded;
+            if (grounded && !wasGrounded && lastFall < -9) SoundBank.PlayAt("land", transform.position, Mathf.InverseLerp(-9, -25, lastFall) * .5f + .5f, 4, 30);
+            wasGrounded = grounded; lastFall = vertical;
             if (grounded)
             {
                 coyote = .12f;
@@ -69,7 +72,7 @@ namespace NivelCero
             if (jumpBuffer > 0 && coyote > 0 && !crouch)
             {
                 vertical = Mathf.Sqrt(2 * 24 * JumpHeight);
-                Tone.Play(280, .08f, transform.position);
+                SoundBank.PlayAt("jump", transform.position, .9f, 4, 30);
                 coyote = jumpBuffer = 0;
             }
             if ((keys.leftShiftKey.wasPressedThisFrame || keys.rightShiftKey.wasPressedThisFrame) && DashReady)
@@ -79,7 +82,7 @@ namespace NivelCero
                 dashCooldown = .85f;
                 if (!grounded) airDash = false;
                 vertical = Mathf.Max(vertical, 0);
-                Tone.Play(120, .18f, transform.position);
+                SoundBank.PlayAt("dash", transform.position, 1, 4, 30);
             }
             if (dashRemaining > 0)
             {
@@ -99,7 +102,7 @@ namespace NivelCero
             if (controller.isGrounded && planar.magnitude > 1)
             {
                 stepCycle -= dt * planar.magnitude;
-                if (stepCycle <= 0) { Tone.Play(130, .04f, transform.position); stepCycle = 2.2f; }
+                if (stepCycle <= 0) { SoundBank.PlayAt("step", transform.position, .8f, 3, 25, .07f, .1f); stepCycle = 2.2f; }
             }
 
             if (Visual != null)

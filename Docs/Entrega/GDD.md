@@ -65,7 +65,7 @@ En una repetición local, el jugador puede corregir su trayectoria, cambiar de a
 | E | Interactuar con Bit o una terminal cercana. |
 | Esc | Pausa; durante hack, cancelar la conexión con sus consecuencias. |
 
-Opciones disponibles: sensibilidad, FOV entre 60 y 110, inversión vertical, volumen, ventana/pantalla completa, resoluciones 1280×720 y 1920×1080 y selección entre los niveles de calidad del proyecto. Se conservan mediante `PlayerPrefs`. Su presencia no equivale a una evaluación de accesibilidad completa.
+Opciones disponibles: sensibilidad, FOV entre 60 y 110, inversión vertical, volumen general, música, efectos, reducir efectos, ventana/pantalla completa, resoluciones 1280×720 y 1920×1080 y selección entre los niveles de calidad del proyecto. Se conservan mediante `PlayerPrefs`. Su presencia no equivale a una evaluación de accesibilidad completa.
 
 ## 7. Movimiento y cámaras
 
@@ -129,15 +129,39 @@ Bit acompaña a Zero sin ocupar el collider del jugador, introduce información 
 
 El guardado 3D usa JSON en `Application.persistentDataPath`, valida versión, IDs, checkpoint y tiempo antes de aplicar datos y escribe mediante archivo temporal y reemplazo. Se verificó carga de checkpoint, fragmentos y puerta, así como recuperación ante datos corruptos. No hay guardado en la nube ni transferencia automática desde la versión web.
 
-## 14. Escena académica 2D
+## 14. Escena académica 2D (versión 0.7)
 
-`AE4_2D_SectorDeArranque` es independiente y ejecutable dentro del mismo proyecto. `Academic2D` construye un `Grid`, `Tilemap`, tiles del atlas original y `TilemapCollider2D`; Zero usa `Rigidbody2D` y `CapsuleCollider2D`. Incluye cámara de seguimiento, tres capas de parallax, Bit autónomo/interactivo, dos huecos, tres fragmentos, checkpoints, terminal de circuito, firewall, Guardián de tres fases y portal.
+`AE4_2D_SectorDeArranque` es independiente y ejecutable dentro del mismo proyecto. Es la escena que demuestra las actividades 2D de la consigna; desde 0.7 tiene arte, animación, sonido e interfaz propios y su jefe es un encuentro completo.
 
-Sus controles son A/D, Espacio, Shift, mouse, click izquierdo, 1/2, E y Esc. No se atribuye a esta escena el cambio FPS/TPS ni la recarga 3D. El progreso 2D se conserva durante la partida, no entre ejecuciones.
+**Tilemap.** Seis Tilemaps sobre un `Grid`: suelo con `TilemapCollider2D`, pasarela opcional de un sentido (`PlatformEffector2D`), purga de fosos, pared de fondo, decoración y corrupción. Los tiles son assets editables (`Art/Academic/Tiles`) y la escena guarda los mapas pintados: se inspeccionan y repintan en la vista Scene. `Nivel Cero > Construir escena 2D editable` los vuelve a hornear desde `Academic2DLevel`. El tileset tiene 32 piezas: bordes, rellenos, fosos, muros, pasarela, fondo y señalética.
 
-La terminal requiere un circuito 3×3. Una validación errónea resta tiempo; agotarlo produce daño y cooldown. El jefe tiene daño y descargas reales, pero su defensa no exige repetir hack por fase como la versión 3D. El recorrido normal bajo la plataforma superior permite terminar con dos fragmentos: el tercero es realmente opcional.
+**Zonas.** Arranque (0–30, limpio y azul), Archivo (30–62, aparecen manchas violeta), Acceso restringido (62–74, firewall rojo), Núcleo de Seguridad (74–98, arena cerrada con borde rojo) y Salida. La corrupción de GL1TCH aumenta al avanzar.
 
-Una prueba de recorrido completo ejecutada en Unity terminó con dos fragmentos principales, gate desbloqueado, jefe sin vida y cero muertes. No se presenta este bot como una partida humana.
+**Zero (Rigidbody2D + CapsuleCollider2D 0,6×1,5).** Animación cuadro a cuadro sin escalar el sprite: reposo, carrera (cadencia ligada a la velocidad, pasos en los cuadros de apoyo), salto, caída, aterrizaje, dash con estela, daño y muerte. El brazo con el arma es un sprite aparte, anclado al hombro de cada cuadro y dibujado en 9 ángulos; apunta al mouse. Salto variable (soltar antes acorta el salto), coyote time, buffer de salto, dash con una carga aérea.
+
+**Parallax.** Tres capas pintadas y repetibles (torres de servidores, torres de refrigeración, conductos) con factores 0,9 / 0,7 / 0,45 en X y seguimiento vertical; se tiñen según la zona. Cámara con escala de píxel entera (nítida a 720p, 1080p y 1440p).
+
+**Bit (NPC).** `GameObject` con `SpriteRenderer`, `Rigidbody2D` cinemático movido con `MovePosition`, `CircleCollider2D` trigger para su cuerpo y un hijo con trigger de interacción que detecta a Zero por `OnTriggerEnter2D/Exit2D`. No bloquea ni empuja: comparte la capa 2, que el suelo y los disparos ignoran. Autonomía (`Bit2D`): seguir, reposo (orbita, mira, parpadea), guiar (vuela a un fragmento o al terminal pendiente y lo señala), combate (se ubica detrás de Zero, lejos del Guardián, y alerta si Zero está en una marca) y reacciones (celebra, se preocupa). Con E habla con voz sintetizada y un consejo según el contexto, con retrato en el cuadro de diálogo.
+
+**Hack.** Circuito 3×3 rotatorio. Validar sin conexión resta 5 s; agotar los 75 s dispara la alarma, 10 de daño y 8 s de bloqueo. Al resolver, el firewall se apaga.
+
+**Guardián (jefe del nivel 1).** 180 de integridad, tres fases (120/60). Presentación: al cruzar x = 80 con el firewall abierto, la compuerta de la arena baja, el Guardián despierta de su estado latente, suena su arranque, aparece el título y cambia la música. Estados con animación propia: latente, reposo, carga, disparo, núcleo expuesto, brazos arriba, golpe, destello de daño, glitch de cambio de fase y muerte de 8 cuadros.
+
+| Fase | Patrón | Respuesta |
+|---|---|---|
+| 1 | Descarga marcada: una retícula roja sobre la posición de Zero; los proyectiles caen en arco al punto marcado | Salir de la retícula durante la carga (0,9 s) |
+| 2 | Descarga triple (marca ±2,4) alternada con golpe al suelo: brazos arriba 0,9 s y onda que recorre el piso | Alejarse de las marcas; saltar la onda |
+| 3 | Descarga, golpe y lluvia corrupta: tres columnas marcadas 1,1 s antes de que caigan bloques | Quedarse en el hueco entre columnas |
+
+Blindado desvía el 80 % del daño (chispa blanca, sonido metálico). **Después de cada ataque el núcleo se abre 1,35–1,6 s** (ámbar, barra dorada, "NÚCLEO EXPUESTO") y recibe daño completo con destello. Ningún golpe salta una fase: al cruzar un umbral, el Guardián queda inmune 1,8 s, pierde una placa (cambio visual de variante) y GL1TCH habla. El contacto con el casco hace 10; descargas y ondas 15; bloques 20. Morir reinicia el encuentro desde el checkpoint previo (Zero recupera 100). La dificultad depende de leer patrones: cada ataque se anuncia con forma (retícula, brazos, columnas), color rojo y sonido propio, y siempre deja una ventana de respuesta.
+
+**Progresión.** Dos fragmentos obligatorios, uno opcional en la pasarela (se sube saltando desde abajo; el pasillo inferior sigue libre), tres checkpoints (restauran integridad), portal que se abre con fragmentos + firewall + Guardián. El progreso se conserva durante la partida, no entre ejecuciones.
+
+**Controles 2D.** A/D o flechas: mover · Espacio o W: saltar (mantener = más alto) · Shift: dash · Mouse: apuntar · Clic izquierdo: atacar · 1/2: arma · E: terminal o Bit · Esc: pausa/cancelar hack. Opciones: volumen general, música, efectos, reducir efectos, pantalla completa.
+
+**Cambios de reglas en 0.7 (justificación).** Salto variable y W/flechas (control más fino y continuidad con AE2); pasarela de un sentido (la ruta opcional deja de requerir un salto lateral preciso); jefe con blindaje/apertura, fases con patrón propio y compuerta de arena (el jefe 0.6 era una imagen oscilante que disparaba siempre igual); daño del jefe 15–20 en lugar de 18 fijo; muerte con animación de 1,35 s antes de la pantalla de derrota.
+
+Pruebas automatizadas (`AcademicFullRouteTests`, `AcademicShowcaseTests`, `AcademicPlayModeTests`) recorren la escena con teclado y mouse sintéticos; el bot del jefe sólo usa información visible para el jugador (marcas y onda). No sustituyen partidas humanas.
 
 ## 15. MDA, Flow y autodeterminación
 
@@ -155,13 +179,21 @@ La autodeterminación se aborda mediante **competencia** —mejora del dominio d
 
 ## 16. Dirección artística y audio
 
-Los modelos se generaron de forma original mediante Blender 4.5.10 LTS: Zero, armas, Guardián, Bit y piezas industriales. Zero dispone de rig y clips para movimiento y acciones; se utilizan Animator y eventos de gameplay para su presentación. Los materiales se adaptan a URP/Lit, con metal oscuro, emisivos y luces de orientación. Hay niebla, bloom moderado, tonemapping y agrupación del entorno estático por materiales.
+La guía está en `Docs/Arte/DIRECCION_ARTISTICA.md`. Resumen: planta industrial digital fría y ordenada que GL1TCH desordena. **Cian = usable/aliado, ámbar = recompensa y núcleo expuesto, rojo = daño, violeta = corrupción**; cada categoría tiene además forma y movimiento propios (rombo que gira, triángulos y franjas, retículas, bloques desplazados). Zero y Bit son redondeados; las defensas, angulosas. Bloom bajo y efectos sólo en eventos; la opción "Reducir efectos" quita sacudidas, destellos y desplazamientos glitch.
 
-El atlas 2D es original y reproducible mediante `Tools/GenerateTiles.ps1`; su estilo de píxel no pretende ser el mismo acabado semi-realista del 3D. La música y efectos son sintetizados por código: `AdaptiveAudio`, `Tone` y audio de combate/escena 2D. La intensidad musical cambia al activarse el Guardián.
+**2D:** pixel art original generado por `Tools/Art/generate_2d_art.py` (Zero 27 cuadros, brazo 18, Bit 18, Guardián 63, FX 54, tileset 32, parallax 3, portal 5, retratos 6). **3D:** modelos originales de Blender (Zero, armas, Guardián, Bit y piezas industriales); en 0.7 se corrigió el deslizamiento de pies ajustando la velocidad del Animator a la velocidad real (Walk ≈ 1,35 m/s, Run ≈ 2,9 m/s), los enemigos dejaron de reutilizar los modelos de Zero y Bit (siluetas angulosas propias con barra sensora roja), Bit 3D se mantiene detrás del hombro, evita paredes, se inclina con el movimiento y mira terminales cercanas, el núcleo del Guardián cambia de rojo (blindado) a ámbar (expuesto) y pulsa al anunciar. La iluminación se rehízo por zonas (servicio frío, archivo neutro, arena con luz principal blanca y contornos rojos), con bordes transitables claros en lugar de guías cian continuas, menos emisivos y niebla más suave.
 
-La fuente **Rajdhani**, utilizada por la interfaz 3D, procede de Indian Type Foundry y está acompañada por **SIL Open Font License 1.1** en `Unity/Assets/NivelCero/Resources/Fonts/OFL.txt`. Debe conservarse ese texto al redistribuir los archivos tipográficos. Los recursos originales recibidos se conservan sin inventarles una licencia distinta.
+**Composición 3D (0.7).** Las líneas emisivas del módulo de piso se apagaron (el cian queda para lo interactivo). El techo tiene vigas transversales cada 6 m y dos conductos de servicio, en lugar de una losa plana. Umbrales con dintel marcan cada zona: Seguridad, Exploración y Núcleo con franja cian; la Arena del Guardián con franja roja como aviso. Grupos de contenedores con colisión rompen la repetición y quedan fuera de la línea principal y de los conectores laterales. La arena tiene un anillo rojo oscuro alrededor del Guardián y dos pilones de seguridad al fondo. El portal tiene marco propio. Los checkpoints pasaron de un cubo cian brillante a una compuerta de dos postes con una placa que se enciende al sincronizar. Las terminales tienen una luz puntual y una placa de acceso mate. Una luz de contorno detrás de Zero separa su armadura oscura del fondo.
 
-El detalle de generación de modelos y validación de importación está en `Docs/ARTE_ORIGINAL.md`. Una lámina renderizada de Blender sirve para inspección artística; no sustituye una captura de gameplay.
+**Guardián 3D (0.7).** Al activarse, las luces de la arena suben del 30 % al 100 % durante 2,8 s, aparece el título "GUARDIÁN DEL SISTEMA" y no ataca durante esa presentación. Gira para encarar a Zero. El núcleo cambia de rojo pequeño (blindado) a ámbar (expuesto) y pulsa durante el aviso de descarga. Tiene sonidos propios de arranque, carga, disparo, daño, cambio de fase, apertura de escudo y muerte, y un cartel de fase en el HUD.
+
+**Armas y cámaras (0.7).** En primera persona el blaster se colocaba en el origen de la cámara cuando no había dispositivos de entrada, porque el posicionamiento iba después de un `return`. Ahora se posiciona siempre, con retroceso por disparo, bajada al recargar y balanceo leve. En primera persona Bit vuela adelante y al costado, fuera de la línea de mira; en tercera persona, detrás del hombro.
+
+**Audio:** música, ambiente y efectos originales sintetizados por `Tools/Audio/generate_audio.py` (ver `Docs/Arte/AUDIO.md`): exploración y combate en la misma tonalidad con fundido cruzado, ambiente de planta, pasos con variación, armas, impactos, sonidos propios del Guardián (arranque, carga, disparo, golpe, daño, fase, muerte), terminales, error y éxito, fragmentos, checkpoints, portal, interfaz, pausa, victoria y derrota. Volúmenes separados de música y efectos; audio posicional en 3D.
+
+**Interfaz:** `UiTheme` comparte paneles, botones con estados (normal, foco, pulsado, deshabilitado), barras segmentadas, teclas, diálogos con retrato y pantalla de hack en ambas escenas, sobre un lienzo 1280×720 escalado sin deformar.
+
+La fuente **Rajdhani** procede de Indian Type Foundry y está acompañada por **SIL Open Font License 1.1** en `Unity/Assets/NivelCero/Resources/Fonts/OFL.txt`. El detalle de los modelos 3D está en `Docs/ARTE_ORIGINAL.md`.
 
 ## 17. Arquitectura real
 
@@ -174,8 +206,8 @@ El detalle de generación de modelos y validación de importación está en `Doc
 | Nivel y catálogo de arte | `World/SectorBuilder.cs`, `GameAssets.cs`, herramientas Editor. |
 | IA y proyectiles | `World/SecurityAgent.cs`, `Guardian.cs`, `ArenaHazard.cs`. |
 | Interacción y progresión | `InteractionScanner.cs`, `Terminal.cs`, `CodeShard.cs`, `CheckpointBeacon.cs`, `ExitPortal.cs`, `RepairCell.cs`, `BitFollower.cs`. |
-| Interfaz y sonido | `GameHud.cs`, `AdaptiveAudio.cs`, `World/Tone.cs`. |
-| Experiencia académica | `Academic/Academic2D.cs`. |
+| Interfaz y sonido | `GameHud.cs`, `UI/UiTheme.cs`, `Audio/SoundBank.cs`, `Audio/MusicDirector.cs`, `Audio/GameSettings.cs`, `AdaptiveAudio.cs`. |
+| Experiencia académica | `Academic/Academic2D*.cs` (juego, nivel, jefe, interfaz), `Academic2DArt`, `Academic2DLevel`, `Bit2D`, `SpriteAnimator2D`. |
 | Pruebas | NUnit/Unity Test Framework en `Tests/Editor`, `Tests/PlayMode`, más comprobaciones Core sin Unity. |
 
 Unity: **6000.3.28f1**. Paquetes fijados: URP **17.3.0**, Input System **1.17.0**, AI Navigation **2.0.16**, Test Framework **1.4.6**. Las dependencias efectivas se registran en `Unity/Packages`. La implementación de cámaras no usa Cinemachine; los efectos no necesitan un grafo Shader Graph propio.
@@ -212,6 +244,6 @@ La duración objetivo de 10–20 minutos no está validada con partidas humanas.
 
 El **build release sin tests** está generado en `Entrega/01_Videojuego3D/Windows/NivelCero.exe`, con sus archivos de soporte. Se comprobó arranque independiente con Direct3D y NVIDIA GeForce RTX 4060 y se observaron cero excepciones no controladas en el registro. Su SHA256 coincide con `Tests/results/release-startup.json`. Los recorridos completos de Windows se ejecutaron en builds de pruebas; no se acredita una partida humana completa del release.
 
-Los **videos reales del framebuffer Unity** están en `Entrega/04_Gameplay/`: el 3D tiene 111,502417 segundos, 1920×1080, H.264 a 30 fps codificados y AAC estéreo a 48 kHz; el 2D tiene 30,887583 segundos, 1078×904 y los mismos codecs/frecuencias. FFprobe confirmó esos valores. No son un informe de rendimiento ni partidas humanas.
+Los **videos 0.7 del framebuffer Unity** están en `Entrega/04_Gameplay/`: el 2D dura 74,7 s y el 3D 63,672 s, ambos a 1920×1080, H.264 a 30 fps y AAC estéreo a 48 kHz (FFprobe). La codificación PNG ahora corre en hilos aparte, de modo que el tiempo de reloj coincide con el de juego (2D: 74,65 s de reloj frente a 74,67 s de juego). Los videos 0.6 se veían a ~0,4× de velocidad por esa espera. Las entradas son automatizadas: no son partidas humanas ni un informe de rendimiento.
 
 Se produjeron **GDD Word/PDF** exportados de Google Docs en `Entrega/03_GDD/` y **presentación offline HTML/PDF de 14 diapositivas** con guion y preguntas en `Entrega/06_Presentacion/`. El PDF de presentación fue verificado con Poppler. Estos archivos no acreditan una exposición ya realizada ni aprobación académica. Las exportaciones Word/PDF se actualizaron al cerrar la entrega y se comprobaron con Poppler y LibreOffice. El cotejo de consignas originales sigue pendiente.

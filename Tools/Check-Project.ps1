@@ -24,7 +24,10 @@ foreach ($scene in $scenes) {
         if ($reference.StartsWith('0000000000000000')) { continue }
         if (!$guids.ContainsKey($reference)) {
             $packageCache = Join-Path $projectRoot 'Unity/Library/PackageCache'
-            $packageMatch = if (Test-Path -LiteralPath $packageCache) { & rg -l --glob '*.meta' --fixed-strings "guid: $reference" $packageCache | Select-Object -First 1 }
+            $packageMatch = if (Test-Path -LiteralPath $packageCache) {
+                if (Get-Command rg -ErrorAction SilentlyContinue) { & rg -l --glob '*.meta' --fixed-strings "guid: $reference" $packageCache | Select-Object -First 1 }
+                else { Get-ChildItem -LiteralPath $packageCache -Filter '*.meta' -Recurse -File | Select-String -SimpleMatch "guid: $reference" -List | Select-Object -First 1 }
+            }
             if (!$packageMatch) { throw "Unresolved scene GUID $reference in $($scene.Name)" }
         }
     }
