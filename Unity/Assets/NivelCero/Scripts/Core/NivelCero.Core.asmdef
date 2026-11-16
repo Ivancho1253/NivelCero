@@ -1,0 +1,7 @@
+{
+  "name": "NivelCero.Core",
+  "rootNamespace": "NivelCero.Core",
+  "references": [],
+  "autoReferenced": true,
+  "noEngineReferences": true
+}
